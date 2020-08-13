@@ -8,16 +8,16 @@
         Title="시간 계산기" Height="550" Width="700" MinHeight="510" MinWidth="340">
 
   <DockPanel Style="{StaticResource Styles.MainWindow}">
-    <TextBlock Name="windowHeader" DockPanel.Dock="Top" FontWeight="Bold" Margin="10">시간</TextBlock>
+    <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Margin="10">시간</TextBlock>
 
-    <Grid Name="windowBody" Grid.Row="1" Margin="10">
+    <Grid Grid.Row="1" Margin="10">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="50"/>
         <ColumnDefinition Width="*"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
-      <Grid Name="outputWindow" Grid.Column="1">
+      <Grid Grid.Column="1">
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
           <RowDefinition Height="*"/>
@@ -34,7 +34,7 @@
         </StackPanel>
       </Grid>
 
-      <Grid Name="inputWindow" Grid.Column="2">
+      <Grid Grid.Column="2">
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
           <RowDefinition Height="*"/>
