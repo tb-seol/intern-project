@@ -4,8 +4,8 @@
                     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.AeroLite">
 
   <!--#region Colors-->
-  <SolidColorBrush x:Key="ComboBox.Static.Background" Color="Transparent"/>
-  <SolidColorBrush x:Key="ComboBox.Static.Border" Color="Transparent"/>
+  <SolidColorBrush x:Key="ComboBox.Static.Background" Color="{StaticResource Color.TimeViewer.Background.Default}"/>
+  <SolidColorBrush x:Key="ComboBox.Static.Border" Color="{StaticResource Color.TimeViewer.Background.Default}"/>
   <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#FF606060"/>
   <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
   <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>

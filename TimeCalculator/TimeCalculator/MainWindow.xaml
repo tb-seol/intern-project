@@ -6,13 +6,8 @@
         xmlns:local="clr-namespace:TimeCalculator"
         mc:Ignorable="d"
         Title="시간 계산기" Height="550" Width="700" MinHeight="510" MinWidth="340">
-  <Window.Resources>
-    <Style TargetType="DockPanel">
-      <Setter Property="Background" Value="Linen"/>
-    </Style>
-  </Window.Resources>
 
-  <DockPanel>
+  <DockPanel Style="{StaticResource Styles.MainWindow}">
     <TextBlock Name="windowHeader" DockPanel.Dock="Top" FontWeight="Bold" Margin="10">시간</TextBlock>
 
     <Grid Name="windowBody" Grid.Row="1" Margin="10">

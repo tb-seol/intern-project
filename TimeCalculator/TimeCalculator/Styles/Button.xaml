@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:TimeCalculator.Styles">
   <!--#region Colors-->
-  <SolidColorBrush x:Key="Brushes.TimeViewerButton.Background.Default" Color="Transparent"/>
-
-  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.Default" Color="White"/>
-  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.MouseOver" Color="MistyRose"/>
-  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.Pressed" Color="LightGray"/>
+  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.Default" Color="{StaticResource Color.NumPad.Button.Background.Default}"/>
+  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.MouseOver" Color="{StaticResource Color.NumPad.Button.Background.MouseOver}"/>
+  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.Pressed" Color="{StaticResource Color.NumPad.Button.Background.Pressed}"/>
+  
+  <SolidColorBrush x:Key="Brushes.TimeViewerButton.Background.Default" Color="{StaticResource Color.TimeViewer.Background.Default}"/>
   <!--#endregion-->
 
   <Style x:Key="Styles.TimeViewerButton" TargetType="Button">

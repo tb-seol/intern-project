@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TimeCalculator.Styles">
+  <!--MainWindow-->
+  <Color x:Key="Color.MainWindow.Background">Linen</Color>
+
+  <!--NumPad-->
+  <Color x:Key="Color.NumPad.Button.Background.Default">White</Color>
+  <Color x:Key="Color.NumPad.Button.Background.MouseOver">MistyRose</Color>
+  <Color x:Key="Color.NumPad.Button.Background.Pressed">LightGray</Color>
+
+  <!--TimeViewer-->
+  <Color x:Key="Color.TimeViewer.Background.Default">Transparent</Color>
+</ResourceDictionary>
