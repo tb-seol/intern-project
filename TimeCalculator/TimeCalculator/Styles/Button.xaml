@@ -40,7 +40,9 @@
       <Setter.Value>
         <ControlTemplate TargetType="Button">
           <Border Background="{TemplateBinding Background}">
-            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Viewbox>
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+            </Viewbox>
           </Border>
         </ControlTemplate>
       </Setter.Value>
