@@ -14,6 +14,7 @@
         <ResourceDictionary Source="Styles\Button.xaml"/>
         <ResourceDictionary Source="Styles\ComboBox.xaml"/>
         <ResourceDictionary Source="Styles\DockPanel.xaml"/>
+        <ResourceDictionary Source="Styles\Grid.xaml"/>
         <ResourceDictionary Source="Styles\UniformGrid.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>

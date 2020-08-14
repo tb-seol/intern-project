@@ -9,8 +9,8 @@
 
   <DockPanel Style="{StaticResource Styles.MainWindow}">
     <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Margin="10">시간</TextBlock>
-    
-    <UniformGrid Style="{StaticResource Styles.MainContent}">      
+
+    <UniformGrid Style="{StaticResource Styles.MainContent}">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="4*"/>
@@ -28,7 +28,7 @@
         </StackPanel>
       </Grid>
 
-      <Grid Grid.Column="1">
+      <Grid Grid.Column="1" Style="{StaticResource Styles.NumPadContent}">
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
           <RowDefinition Height="*"/>
@@ -43,23 +43,23 @@
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Name="btnNumPadClear" Style="{StaticResource Styles.NumPadButton}" Grid.Column="1">CE</Button>
-        <Button Name="btnNumPadDelete" Style="{StaticResource Styles.NumPadButton}" Grid.Column="2">DEL</Button>
+        <Button Name="NumPadButton_Clear" Grid.Column="1">CE</Button>
+        <Button Name="NumPadButton_Delete" Grid.Column="2">DEL</Button>
 
-        <Button Name="btnNumPadSeven" Style="{StaticResource Styles.NumPadButton}" Grid.Row="1">7</Button>
-        <Button Name="btnNumPadEight" Style="{StaticResource Styles.NumPadButton}" Grid.Row="1" Grid.Column="1">8</Button>
-        <Button Name="btnNumPadNine" Style="{StaticResource Styles.NumPadButton}" Grid.Row="1" Grid.Column="2">9</Button>
+        <Button Name="NumPadButton_Seven" Grid.Row="1">7</Button>
+        <Button Name="NumPadButton_Eight" Grid.Row="1" Grid.Column="1">8</Button>
+        <Button Name="NumPadButton_Nine" Grid.Row="1" Grid.Column="2">9</Button>
 
-        <Button Name="btnNumPadFour" Style="{StaticResource Styles.NumPadButton}" Grid.Row="2">4</Button>
-        <Button Name="btnNumPadFive" Style="{StaticResource Styles.NumPadButton}" Grid.Row="2" Grid.Column="1">5</Button>
-        <Button Name="btnNumPadSix" Style="{StaticResource Styles.NumPadButton}" Grid.Row="2" Grid.Column="2">6</Button>
+        <Button Name="NumPadButton_Four" Grid.Row="2">4</Button>
+        <Button Name="NumPadButton_Five" Grid.Row="2" Grid.Column="1">5</Button>
+        <Button Name="NumPadButton_Six" Grid.Row="2" Grid.Column="2">6</Button>
 
-        <Button Name="btnNumPadOne" Style="{StaticResource Styles.NumPadButton}" Grid.Row="3">1</Button>
-        <Button Name="btnNumPadTwo" Style="{StaticResource Styles.NumPadButton}" Grid.Row="3" Grid.Column="1">2</Button>
-        <Button Name="btnNumPadThree" Style="{StaticResource Styles.NumPadButton}" Grid.Row="3" Grid.Column="2">3</Button>
+        <Button Name="NumPadButton_One" Grid.Row="3">1</Button>
+        <Button Name="NumPadButton_Two" Grid.Row="3" Grid.Column="1">2</Button>
+        <Button Name="NumPadButton_Three" Grid.Row="3" Grid.Column="2">3</Button>
 
-        <Button Name="btnNumPadZero" Style="{StaticResource Styles.NumPadButton}" Grid.Row="4" Grid.Column="1">0</Button>
-        <Button Name="btnNumPadDot" Style="{StaticResource Styles.NumPadButton}" Grid.Row="4" Grid.Column="2">.</Button>
+        <Button Name="NumPadButton_Zero" Grid.Row="4" Grid.Column="1">0</Button>
+        <Button Name="NumPadButton_Dot" Grid.Row="4" Grid.Column="2">.</Button>
       </Grid>
     </UniformGrid>
   </DockPanel>
