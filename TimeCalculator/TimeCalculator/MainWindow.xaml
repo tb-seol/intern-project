@@ -9,32 +9,57 @@
 
   <DockPanel Style="{StaticResource Styles.MainWindow}">
     <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Margin="10">시간</TextBlock>
-
-    <Grid Grid.Row="1" Margin="10">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="50"/>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
-
-      <Grid Grid.Column="1">
+    <UniformGrid>
+      <UniformGrid.Resources>
+        <local:IsLessThanMultiConverter x:Key="mcvt_IsLessThan"/>
+      </UniformGrid.Resources>
+      <UniformGrid.Style>
+        <Style TargetType="{x:Type UniformGrid}">
+          <Style.Triggers>
+            <DataTrigger>
+              <DataTrigger.Binding>
+                <MultiBinding Converter="{StaticResource mcvt_IsLessThan}">
+                  <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualWidth"/>
+                  <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualHeight"/>
+                </MultiBinding>
+              </DataTrigger.Binding>
+              <DataTrigger.Value>True</DataTrigger.Value>
+              <Setter Property="Columns" Value="0"/>
+              <Setter Property="Rows" Value="2"/>
+            </DataTrigger>
+            <DataTrigger>
+              <DataTrigger.Binding>
+                <MultiBinding Converter="{StaticResource mcvt_IsLessThan}">
+                  <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualWidth"/>
+                  <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualHeight"/>
+                </MultiBinding>
+              </DataTrigger.Binding>
+              <DataTrigger.Value>False</DataTrigger.Value>
+              <Setter Property="Columns" Value="2"/>
+              <Setter Property="Rows" Value="0"/>
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </UniformGrid.Style>
+      
+      <Grid>
         <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="100"/>
+          <RowDefinition Height="4*"/>
+          <RowDefinition Height="4*"/>
+          <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
         <local:TimeViewer x:Name="topViewer"></local:TimeViewer>
 
         <local:TimeViewer x:Name="bottomViewer" Grid.Row="1"></local:TimeViewer>
 
-        <StackPanel Name="otherTypesViewer" Grid.Row="2">
+        <StackPanel Name="otherTypesViewer" Grid.Row="2" VerticalAlignment="Center">
           <TextBlock>대략 같음</TextBlock>
           <TextBlock>0 ms 0s 0시간</TextBlock>
         </StackPanel>
       </Grid>
 
-      <Grid Grid.Column="2">
+      <Grid Grid.Column="1">
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
           <RowDefinition Height="*"/>
@@ -67,6 +92,6 @@
         <Button Name="btnNumPadZero" Style="{StaticResource Styles.NumPadButton}" Grid.Row="4" Grid.Column="1">0</Button>
         <Button Name="btnNumPadDot" Style="{StaticResource Styles.NumPadButton}" Grid.Row="4" Grid.Column="2">.</Button>
       </Grid>
-    </Grid>
+    </UniformGrid>
   </DockPanel>
 </Window>
