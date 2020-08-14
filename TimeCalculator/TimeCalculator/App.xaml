@@ -6,10 +6,15 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+          <local:IsLessThanMultiConverter x:Key="mcvt_IsLessThan"/>
+        </ResourceDictionary>
+        
         <ResourceDictionary Source="Styles\Color.xaml"/>
         <ResourceDictionary Source="Styles\Button.xaml"/>
         <ResourceDictionary Source="Styles\ComboBox.xaml"/>
         <ResourceDictionary Source="Styles\DockPanel.xaml"/>
+        <ResourceDictionary Source="Styles\UniformGrid.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

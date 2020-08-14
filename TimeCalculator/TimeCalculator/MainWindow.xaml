@@ -9,39 +9,8 @@
 
   <DockPanel Style="{StaticResource Styles.MainWindow}">
     <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Margin="10">시간</TextBlock>
-    <UniformGrid>
-      <UniformGrid.Resources>
-        <local:IsLessThanMultiConverter x:Key="mcvt_IsLessThan"/>
-      </UniformGrid.Resources>
-      <UniformGrid.Style>
-        <Style TargetType="{x:Type UniformGrid}">
-          <Style.Triggers>
-            <DataTrigger>
-              <DataTrigger.Binding>
-                <MultiBinding Converter="{StaticResource mcvt_IsLessThan}">
-                  <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualWidth"/>
-                  <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualHeight"/>
-                </MultiBinding>
-              </DataTrigger.Binding>
-              <DataTrigger.Value>True</DataTrigger.Value>
-              <Setter Property="Columns" Value="0"/>
-              <Setter Property="Rows" Value="2"/>
-            </DataTrigger>
-            <DataTrigger>
-              <DataTrigger.Binding>
-                <MultiBinding Converter="{StaticResource mcvt_IsLessThan}">
-                  <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualWidth"/>
-                  <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualHeight"/>
-                </MultiBinding>
-              </DataTrigger.Binding>
-              <DataTrigger.Value>False</DataTrigger.Value>
-              <Setter Property="Columns" Value="2"/>
-              <Setter Property="Rows" Value="0"/>
-            </DataTrigger>
-          </Style.Triggers>
-        </Style>
-      </UniformGrid.Style>
-      
+    
+    <UniformGrid Style="{StaticResource Styles.MainContent}">      
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="4*"/>
