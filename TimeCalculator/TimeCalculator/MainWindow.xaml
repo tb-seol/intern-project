@@ -49,9 +49,9 @@
           <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <local:TimeViewer x:Name="topViewer"></local:TimeViewer>
+        <local:TimeViewerGrid x:Name="topViewer"></local:TimeViewerGrid>
 
-        <local:TimeViewer x:Name="bottomViewer" Grid.Row="1"></local:TimeViewer>
+        <local:TimeViewerGrid x:Name="bottomViewer" Grid.Row="1"></local:TimeViewerGrid>
 
         <StackPanel Name="otherTypesViewer" Grid.Row="2" VerticalAlignment="Center">
           <TextBlock>대략 같음</TextBlock>
