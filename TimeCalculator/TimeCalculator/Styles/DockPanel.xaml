@@ -5,7 +5,7 @@
   <SolidColorBrush x:Key="Brushes.MainWindow.Background.Default" Color="{StaticResource Color.MainWindow.Background}"/>
   <!--#endregion-->
 
-  <Style x:Key="Styles.MainWindow" TargetType="DockPanel">
+  <Style x:Key="Styles.Main.Window" TargetType="DockPanel">
     <Setter Property="Background" Value="{StaticResource Brushes.MainWindow.Background.Default}"/>
   </Style>
 </ResourceDictionary>

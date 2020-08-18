@@ -9,6 +9,6 @@
   <Color x:Key="Color.NumPad.Button.Background.MouseOver">MistyRose</Color>
   <Color x:Key="Color.NumPad.Button.Background.Pressed">LightGray</Color>
 
-  <!--TimeViewer-->
-  <Color x:Key="Color.TimeViewer.Background.Default">Transparent</Color>
+  <!--Viewer-->
+  <Color x:Key="Color.Viewer.Background.Default">Transparent</Color>
 </ResourceDictionary>

@@ -4,8 +4,8 @@
                     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.AeroLite">
 
   <!--#region Colors-->
-  <SolidColorBrush x:Key="ComboBox.Static.Background" Color="{StaticResource Color.TimeViewer.Background.Default}"/>
-  <SolidColorBrush x:Key="ComboBox.Static.Border" Color="{StaticResource Color.TimeViewer.Background.Default}"/>
+  <SolidColorBrush x:Key="ComboBox.Static.Background" Color="{StaticResource Color.Viewer.Background.Default}"/>
+  <SolidColorBrush x:Key="ComboBox.Static.Border" Color="{StaticResource Color.Viewer.Background.Default}"/>
   <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#FF606060"/>
   <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
   <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>
@@ -168,7 +168,7 @@
         </theme:SystemDropShadowChrome>
       </Popup>
       <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
-      <Border x:Name="border" Background="{StaticResource TextBox.Static.Background}" Margin="{TemplateBinding BorderThickness}">
+      <Border x:Name="border" Background="{StaticResource Brushes.NumPad.Button.Background.Default}" Margin="{TemplateBinding BorderThickness}">
         <TextBox x:Name="PART_EditableTextBox" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" Margin="{TemplateBinding Padding}" Style="{StaticResource ComboBoxEditableTextBox}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
       </Border>
     </Grid>
@@ -244,7 +244,7 @@
     </ControlTemplate.Triggers>
   </ControlTemplate>
 
-  <Style x:Key="Styles.TimeViewerComboBox" TargetType="{x:Type ComboBox}">
+  <Style x:Key="Styles.Viewer.ComboBox" TargetType="{x:Type ComboBox}">
     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
     <Setter Property="Background" Value="{StaticResource ComboBox.Static.Background}"/>
     <Setter Property="BorderBrush" Value="{StaticResource ComboBox.Static.Border}"/>

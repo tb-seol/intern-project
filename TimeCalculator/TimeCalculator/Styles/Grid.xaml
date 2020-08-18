@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:TimeCalculator.Styles">
-  <Style x:Key="Styles.NumPadContent" TargetType="Grid">
+  <Style x:Key="Styles.NumPad" TargetType="Grid">
     <Style.Resources>
-      <Style TargetType="Button" BasedOn="{StaticResource Styles.NumPadButton}"/>
+      <Style TargetType="Button" BasedOn="{StaticResource Styles.NumPad.Button}"/>
     </Style.Resources>
   </Style>
 </ResourceDictionary>
