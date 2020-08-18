@@ -7,10 +7,9 @@
         mc:Ignorable="d"
         Title="시간 계산기" Height="550" Width="700" MinHeight="510" MinWidth="340">
 
-  <DockPanel Style="{StaticResource Styles.MainWindow}">
-    <TextBlock DockPanel.Dock="Top" FontWeight="Bold" Margin="10">시간</TextBlock>
-
-    <UniformGrid Style="{StaticResource Styles.MainContent}">
+  <DockPanel Style="{StaticResource Styles.Main.Window}">
+    <TextBlock DockPanel.Dock="Top" Style="{StaticResource Styles.Main.Header}" Text="시간"/>
+    <UniformGrid Style="{StaticResource Styles.Main.Content}">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="4*"/>
@@ -18,17 +17,16 @@
           <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <local:TimeViewerGrid x:Name="topViewer"></local:TimeViewerGrid>
+        <local:ViewerGrid x:Name="xViewerGrid_Top"/>
+        <local:ViewerGrid x:Name="xViewerGrid_Bottom" Grid.Row="1"/>
 
-        <local:TimeViewerGrid x:Name="bottomViewer" Grid.Row="1"></local:TimeViewerGrid>
-
-        <StackPanel Name="otherTypesViewer" Grid.Row="2" VerticalAlignment="Center">
+        <StackPanel Name="xStackPanel_OthersViewer" Grid.Row="2" VerticalAlignment="Center">
           <TextBlock>대략 같음</TextBlock>
           <TextBlock>0 ms 0s 0시간</TextBlock>
         </StackPanel>
       </Grid>
 
-      <Grid Grid.Column="1" Style="{StaticResource Styles.NumPadContent}">
+      <Grid Grid.Column="1" Style="{StaticResource Styles.NumPad}">
         <Grid.RowDefinitions>
           <RowDefinition Height="*"/>
           <RowDefinition Height="*"/>
@@ -36,30 +34,54 @@
           <RowDefinition Height="*"/>
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
           <ColumnDefinition Width="*"/>
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Name="NumPadButton_Clear" Grid.Column="1">CE</Button>
-        <Button Name="NumPadButton_Delete" Grid.Column="2">DEL</Button>
+        <Button Name="xButton_NumPad_Clear" Grid.Column="1"
+                Click="xButton_NumPad_Clear_Click" Content="CE"/>
 
-        <Button Name="NumPadButton_Seven" Grid.Row="1">7</Button>
-        <Button Name="NumPadButton_Eight" Grid.Row="1" Grid.Column="1">8</Button>
-        <Button Name="NumPadButton_Nine" Grid.Row="1" Grid.Column="2">9</Button>
+        <Button Name="xButton_NumPad_Delete" Grid.Column="2"
+                Click="xButton_NumPad_Delete_Click" Content="DEL"/>
 
-        <Button Name="NumPadButton_Four" Grid.Row="2">4</Button>
-        <Button Name="NumPadButton_Five" Grid.Row="2" Grid.Column="1">5</Button>
-        <Button Name="NumPadButton_Six" Grid.Row="2" Grid.Column="2">6</Button>
 
-        <Button Name="NumPadButton_One" Grid.Row="3">1</Button>
-        <Button Name="NumPadButton_Two" Grid.Row="3" Grid.Column="1">2</Button>
-        <Button Name="NumPadButton_Three" Grid.Row="3" Grid.Column="2">3</Button>
+        <Button Name="xButton_NumPad_Seven" Grid.Row="1"
+                Click="xButton_NumPad_Seven_Click" Content="7"/>
 
-        <Button Name="NumPadButton_Zero" Grid.Row="4" Grid.Column="1">0</Button>
-        <Button Name="NumPadButton_Dot" Grid.Row="4" Grid.Column="2">.</Button>
+        <Button Name="xButton_NumPad_Eight" Grid.Row="1" Grid.Column="1"
+                Click="xButton_NumPad_Eight_Click" Content="8"/>
+
+        <Button Name="xButton_NumPad_Nine" Grid.Row="1" Grid.Column="2"
+                Click="xButton_NumPad_Nine_Click" Content="9"/>
+
+
+        <Button Name="xButton_NumPad_Four" Grid.Row="2"
+                Click="xButton_NumPad_Four_Click" Content="4"/>
+
+        <Button Name="xButton_NumPad_Five" Grid.Row="2" Grid.Column="1"
+                Click="xButton_NumPad_Five_Click" Content="5"/>
+
+        <Button Name="xButton_NumPad_Six" Grid.Row="2" Grid.Column="2"
+                Click="xButton_NumPad_Six_Click" Content="6"/>
+
+
+        <Button Name="xButton_NumPad_One" Grid.Row="3"
+                Click="xButton_NumPad_One_Click" Content="3"/>
+
+        <Button Name="xButton_NumPad_Two" Grid.Row="3" Grid.Column="1"
+                Click="xButton_NumPad_Two_Click" Content="2"/>
+
+        <Button Name="xButton_NumPad_Three" Grid.Row="3" Grid.Column="2"
+                Click="xButton_NumPad_Three_Click" Content="3"/>
+
+
+        <Button Name="xButton_NumPad_Zero" Grid.Row="4" Grid.Column="1"
+                Click="xButton_NumPad_Zero_Click" Content="0"/>
+
+        <Button Name="xButton_NumPad_Dot" Grid.Row="4" Grid.Column="2"
+                Click="xButton_NumPad_Dot_Click" Content="."/>
       </Grid>
     </UniformGrid>
   </DockPanel>

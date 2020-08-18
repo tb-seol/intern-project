@@ -2,36 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:TimeCalculator.Styles">
   <!--#region Colors-->
-  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.Default" Color="{StaticResource Color.NumPad.Button.Background.Default}"/>
-  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.MouseOver" Color="{StaticResource Color.NumPad.Button.Background.MouseOver}"/>
-  <SolidColorBrush x:Key="Brushes.NumPadButton.Background.Pressed" Color="{StaticResource Color.NumPad.Button.Background.Pressed}"/>
-  
-  <SolidColorBrush x:Key="Brushes.TimeViewerButton.Background.Default" Color="{StaticResource Color.TimeViewer.Background.Default}"/>
+  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.Default" Color="{StaticResource Color.NumPad.Button.Background.Default}"/>
+  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.MouseOver" Color="{StaticResource Color.NumPad.Button.Background.MouseOver}"/>
+  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.Pressed" Color="{StaticResource Color.NumPad.Button.Background.Pressed}"/>
   <!--#endregion-->
 
-  <Style x:Key="Styles.TimeViewerButton" TargetType="Button">
-    <Setter Property="Background" Value="{StaticResource Brushes.TimeViewerButton.Background.Default}"/>
-    <Setter Property="FontSize" Value="30"/>
-    <Setter Property="Padding" Value="10"/>
-    <Setter Property="BorderThickness" Value="0"/>
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="Button">
-          <Border Background="{TemplateBinding Background}">
-            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-          </Border>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-    <Style.Triggers>
-      <Trigger Property="Button.IsPressed" Value="True">
-        <Setter Property="FontWeight" Value="Bold"/>
-      </Trigger>
-    </Style.Triggers>
-  </Style>
-
-  <Style x:Key="Styles.NumPadButton" TargetType="Button">
-    <Setter Property="Background" Value="{StaticResource Brushes.NumPadButton.Background.Default}"/>
+  <Style x:Key="Styles.NumPad.Button" TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource Brushes.NumPad.Button.Background.Default}"/>
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="Margin" Value="1"/>
     <Setter Property="FontSize" Value="20"/>
@@ -49,10 +26,10 @@
     </Setter>
     <Style.Triggers>
       <Trigger Property="IsMouseOver" Value="True">
-        <Setter Property="Background" Value="{StaticResource Brushes.NumPadButton.Background.MouseOver}"/>
+        <Setter Property="Background" Value="{StaticResource Brushes.NumPad.Button.Background.MouseOver}"/>
       </Trigger>
       <Trigger Property="Button.IsPressed" Value="True">
-        <Setter Property="Background" Value="{StaticResource Brushes.NumPadButton.Background.Pressed}"/>
+        <Setter Property="Background" Value="{StaticResource Brushes.NumPad.Button.Background.Pressed}"/>
       </Trigger>
     </Style.Triggers>
   </Style>
