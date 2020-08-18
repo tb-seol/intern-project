@@ -1,25 +1,26 @@
-﻿<UserControl x:Class="TimeCalculator.TimeViewerGrid"
+﻿<UserControl x:Class="TimeCalculator.ViewerGrid"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TimeCalculator"
-             mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="400" xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+             mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="400">
   <Grid HorizontalAlignment="Left">
     <Grid.RowDefinitions>
       <RowDefinition/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <Button Name="timeValue" Style="{StaticResource Styles.TimeViewerButton}">
-      123456789
-    </Button>
+    <TextBlock Name="xTextBlockTime" Text="0" Style="{StaticResource Styles.Viewer.TextBlock}"/>
 
-    <ComboBox Name="timeType" Style="{StaticResource Styles.TimeViewerComboBox}" Grid.Row="1">
-      <ComboBoxItem>마이크로초</ComboBoxItem>
+    <ComboBox Name="xComboBoxTimeUnit"
+              Grid.Row="1"
+              SelectionChanged="xComboBoxTimeUnit_SelectionChanged"
+              Style="{StaticResource Styles.Viewer.ComboBox}">
+      <ComboBoxItem IsSelected="True">마이크로초</ComboBoxItem>
       <ComboBoxItem>밀리초</ComboBoxItem>
       <ComboBoxItem>초</ComboBoxItem>
-      <ComboBoxItem IsSelected="True">분</ComboBoxItem>
+      <ComboBoxItem>분</ComboBoxItem>
       <ComboBoxItem>시간</ComboBoxItem>
       <ComboBoxItem>일</ComboBoxItem>
       <ComboBoxItem>주</ComboBoxItem>
