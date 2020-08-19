@@ -68,7 +68,7 @@
 
 
         <Button Name="xButton_NumPad_One" Grid.Row="3"
-                Click="xButton_NumPad_One_Click" Content="3"/>
+                Click="xButton_NumPad_One_Click" Content="1"/>
 
         <Button Name="xButton_NumPad_Two" Grid.Row="3" Grid.Column="1"
                 Click="xButton_NumPad_Two_Click" Content="2"/>
