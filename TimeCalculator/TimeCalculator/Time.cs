@@ -18,20 +18,20 @@ namespace TimeCalculator
 
         private static List<char> VALIDATE_CHARACTERS = new List<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.' };
 
-        private StringBuilder mMicroSecondsStringBuilder = new StringBuilder(1024);
+        private StringBuilder mMicroSeconds = new StringBuilder(1024);
         private bool bUsedDecimalPoint = false;
 
         public void Clear()
         {
-            mMicroSecondsStringBuilder.Clear();
+            mMicroSeconds.Clear();
             bUsedDecimalPoint = false;
         }
 
         public void Delete()
         {
-            if (mMicroSecondsStringBuilder.Length > 0)
+            if (mMicroSeconds.Length > 0)
             {
-                mMicroSecondsStringBuilder.Length--;
+                mMicroSeconds.Length--;
             }
         }
 
@@ -52,60 +52,58 @@ namespace TimeCalculator
                 bUsedDecimalPoint = true;
             }
 
-            mMicroSecondsStringBuilder.Append(character);
+            mMicroSeconds.Append(character);
         }
 
         public string ConvertTo(ETimeUnit timeUnit)
         {
-            if (mMicroSecondsStringBuilder.Length == 0)
+            if (mMicroSeconds.Length == 0)
             {
                 return ZERO;
             }
 
-            double time = double.MinValue;
-
-            string strMicroSeconds = mMicroSecondsStringBuilder.ToString();
+            double convertedTime = double.MinValue;
 
             double microSeconds;
 
-            if (double.TryParse(strMicroSeconds, out microSeconds))
+            if (double.TryParse(mMicroSeconds.ToString(), out microSeconds))
             {
                 switch (timeUnit)
                 {
                     case ETimeUnit.MicroSecond:
-                        time = microSeconds;
+                        convertedTime = microSeconds;
                         break;
                     case ETimeUnit.MilliSecond:
-                        time = microSeconds / MILLI_SECOND_UNIT;
+                        convertedTime = microSeconds / MILLI_SECOND_UNIT;
                         break;
                     case ETimeUnit.Second:
-                        time = microSeconds / SECOND_UNIT;
+                        convertedTime = microSeconds / SECOND_UNIT;
                         break;
                     case ETimeUnit.Minute:
-                        time = microSeconds / MINUTE_UNIT;
+                        convertedTime = microSeconds / MINUTE_UNIT;
                         break;
                     case ETimeUnit.Hour:
-                        time = microSeconds / HOUR_UNIT;
+                        convertedTime = microSeconds / HOUR_UNIT;
                         break;
                     case ETimeUnit.Day:
-                        time = microSeconds / DAY_UNIT;
+                        convertedTime = microSeconds / DAY_UNIT;
                         break;
                     case ETimeUnit.Week:
-                        time = microSeconds / WEEK_UNIT;
+                        convertedTime = microSeconds / WEEK_UNIT;
                         break;
                     case ETimeUnit.Year:
-                        time = microSeconds / YEAR_UNIT;
+                        convertedTime = microSeconds / YEAR_UNIT;
                         break;
                     default:
                         Debug.Assert(false, "unknown type");
-                        time = double.MinValue;
+                        convertedTime = double.MinValue;
                         break;
                 }
             }
 
-            Debug.Assert(time != double.MinValue);
+            Debug.Assert(convertedTime != double.MinValue);
 
-            return time.ToString("N");
+            return convertedTime.ToString("N");
         }
     }
 }
