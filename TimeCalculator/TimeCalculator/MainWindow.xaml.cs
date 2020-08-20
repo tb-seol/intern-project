@@ -150,8 +150,9 @@ namespace TimeCalculator
             xViewerGrid_Top.UpdateTime(times);
             xViewerGrid_Bottom.UpdateTime(times);
 
-            xTextBlock_OtherTimesTitle.Text = OTHER_TIMES_TITLE;
-            xTextBlock_OtherTimesBody.Text = sb.ToString();
+            string title = (sb.Length > 0) ? OTHER_TIMES_TITLE : "";
+            xTextBlock_SubViewerTitle.Text = title;
+            xTextBlock_SubViewerBody.Text = sb.ToString();
         }
 
         private string formatTimeValue(double value)
