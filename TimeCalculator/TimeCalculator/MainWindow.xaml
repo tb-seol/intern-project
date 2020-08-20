@@ -27,8 +27,14 @@
         <local:ViewerGrid x:Name="xViewerGrid_Bottom" Grid.Row="1"/>
 
         <StackPanel Grid.Row="2" VerticalAlignment="Center">
-          <TextBlock Name="xTextBlock_SubViewerTitle"/>
-          <TextBlock Name="xTextBlock_SubViewerBody"/>
+          <TextBlock Name="xTextBlock_MiniViewerTitle"/>
+          <ItemsControl Name="xItemsControl_MiniViewerValues">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <VirtualizingStackPanel Orientation="Horizontal"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+          </ItemsControl>
         </StackPanel>
       </Grid>
 
