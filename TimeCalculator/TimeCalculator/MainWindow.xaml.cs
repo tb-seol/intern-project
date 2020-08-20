@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace TimeCalculator
 {
@@ -7,96 +11,157 @@ namespace TimeCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static Time Time { get; } = new Time();
+        private static string OTHER_TIMES_TITLE = "대략 같음";
+        private static string[] OTHER_TIMES_VALUES = new string[] { "yr", "주", "d", "시간", "분", "s", "ms", "us" };
+
+        private Time mTime;
+        private ETimeUnit mTopViewerDefaultUnit = ETimeUnit.Minute;
+        private ETimeUnit mBottomViewerDefaultUnit = ETimeUnit.Hour;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            mTime = new Time(mTopViewerDefaultUnit);
+            xViewerGrid_Top.SetTimeUnit(mTopViewerDefaultUnit);
+            xViewerGrid_Bottom.SetTimeUnit(mBottomViewerDefaultUnit);
+
+            xViewerGrid_Top.xComboBox_TimeUnit.SelectionChanged += XComboBox_TimeUnit_SelectionChanged_Top;
+            xViewerGrid_Bottom.xComboBox_TimeUnit.SelectionChanged += XComboBox_TimeUnit_SelectionChanged_Bottom;
             DataContext = this;
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            xViewerGrid_Top.xComboBox_TimeUnit.SelectionChanged -= XComboBox_TimeUnit_SelectionChanged_Top;
+            xViewerGrid_Bottom.xComboBox_TimeUnit.SelectionChanged -= XComboBox_TimeUnit_SelectionChanged_Bottom;
         }
 
         private void xButton_NumPad_Clear_Click(object sender, RoutedEventArgs e)
         {
-            Time.Clear();
+            mTime.Clear();
             updateViewer();
         }
 
         private void xButton_NumPad_Delete_Click(object sender, RoutedEventArgs e)
         {
-            Time.Delete();
+            mTime.RemoveLastCharacter();
             updateViewer();
         }
 
         private void xButton_NumPad_Seven_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('7');
+            mTime.AppendCharacter('7');
             updateViewer();
         }
 
         private void xButton_NumPad_Eight_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('8');
+            mTime.AppendCharacter('8');
             updateViewer();
         }
 
         private void xButton_NumPad_Nine_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('9');
+            mTime.AppendCharacter('9');
             updateViewer();
         }
 
         private void xButton_NumPad_Four_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('4');
+            mTime.AppendCharacter('4');
             updateViewer();
         }
 
         private void xButton_NumPad_Five_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('5');
+            mTime.AppendCharacter('5');
             updateViewer();
         }
 
         private void xButton_NumPad_Six_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('6');
+            mTime.AppendCharacter('6');
             updateViewer();
         }
 
         private void xButton_NumPad_One_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('1');
+            mTime.AppendCharacter('1');
             updateViewer();
         }
 
         private void xButton_NumPad_Two_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('2');
+            mTime.AppendCharacter('2');
             updateViewer();
         }
 
         private void xButton_NumPad_Three_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('3');
+            mTime.AppendCharacter('3');
             updateViewer();
         }
 
         private void xButton_NumPad_Zero_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('0');
+            mTime.AppendCharacter('0');
             updateViewer();
         }
 
         private void xButton_NumPad_Dot_Click(object sender, RoutedEventArgs e)
         {
-            Time.AppendCharacter('.');
+            mTime.AppendCharacter('.');
+            updateViewer();
+        }
+
+        private void XComboBox_TimeUnit_SelectionChanged_Top(object sender, SelectionChangedEventArgs e)
+        {
+            mTime.UnitForConvert = xViewerGrid_Top.GetTimeUnit();
+            updateViewer();
+        }
+
+        private void XComboBox_TimeUnit_SelectionChanged_Bottom(object sender, SelectionChangedEventArgs e)
+        {
             updateViewer();
         }
 
         private void updateViewer()
         {
-            xViewerGrid_Top.UpdateValue();
-            xViewerGrid_Bottom.UpdateValue();
+            const double MIN_VALUE = 0.01;
+
+            List<double> times = mTime.GetAllTimes();
+
+            StringBuilder sb = new StringBuilder(128);
+            for (int i = 0; i < times.Count; i++)
+            {
+                double value = times[times.Count - 1 - i];
+
+                if (value >= MIN_VALUE)
+                {
+                    sb.Append(formatTimeValue(value))
+                        .Append(" ")
+                        .Append(OTHER_TIMES_VALUES[i])
+                        .Append("   ");
+                }
+            }
+
+            xViewerGrid_Top.UpdateTime(times);
+            xViewerGrid_Bottom.UpdateTime(times);
+
+            xTextBlock_OtherTimesTitle.Text = OTHER_TIMES_TITLE;
+            xTextBlock_OtherTimesBody.Text = sb.ToString();
+        }
+
+        private string formatTimeValue(double value)
+        {
+            if (value < 10)
+            {
+                return Math.Round(value, 2).ToString();
+            }
+
+            return Math.Round(value).ToString("N0");
         }
     }
 }

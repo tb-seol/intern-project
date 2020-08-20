@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace TimeCalculator
@@ -8,53 +8,27 @@ namespace TimeCalculator
     /// </summary>
     public partial class ViewerGrid : UserControl
     {
-        private ETimeUnit timeUnit;
-
         public ViewerGrid()
         {
             InitializeComponent();
         }
 
-        public void UpdateValue()
+        public void UpdateTime(List<double> times)
         {
-            xTextBlockTime.Text = MainWindow.Time.ConvertTo(timeUnit);
+            double time = times[xComboBox_TimeUnit.SelectedIndex];
+            string result = (time % 1 == 0) ? time.ToString("N0") : time.ToString("N");
+
+            xTextBlock_Time.Text = result;
         }
 
-        private void xComboBoxTimeUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public ETimeUnit GetTimeUnit()
         {
-            ComboBox box = sender as ComboBox;
-            ComboBoxItem item = box.SelectedItem as ComboBoxItem;
+            return (ETimeUnit)xComboBox_TimeUnit.SelectedIndex;
+        }
 
-            switch (item.Content)
-            {
-                case "밀리초":
-                    timeUnit = ETimeUnit.MilliSecond;
-                    break;
-                case "초":
-                    timeUnit = ETimeUnit.Second;
-                    break;
-                case "분":
-                    timeUnit = ETimeUnit.Minute;
-                    break;
-                case "시간":
-                    timeUnit = ETimeUnit.Hour;
-                    break;
-                case "일":
-                    timeUnit = ETimeUnit.Day;
-                    break;
-                case "주":
-                    timeUnit = ETimeUnit.Week;
-                    break;
-                case "년":
-                    timeUnit = ETimeUnit.Year;
-                    break;
-                case "마이크로초":
-                default:
-                    timeUnit = ETimeUnit.MicroSecond;
-                    break;
-            }
-
-            UpdateValue();
+        public void SetTimeUnit(ETimeUnit timeUnit)
+        {
+            xComboBox_TimeUnit.SelectedIndex = (int)timeUnit;
         }
     }
 }
