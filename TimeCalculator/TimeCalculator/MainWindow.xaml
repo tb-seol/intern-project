@@ -46,73 +46,61 @@
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Name="xButton_NumPad_Clear"
-                Grid.Column="1"
+        <Button Grid.Column="1"
                 Content="CE"
-                Click="xButton_NumPad_Clear_Click"/>
+                Click="xButton_NumPad_Click_Clear"/>
 
-        <Button Name="xButton_NumPad_Delete"
-                Grid.Column="2"
+        <Button Grid.Column="2"
                 Content="DEL"
-                Click="xButton_NumPad_Delete_Click"/>
+                Click="xButton_NumPad_Click_Delete"/>
 
-        <Button Name="xButton_NumPad_Seven"
-                Grid.Row="1"
+
+        <Button Grid.Row="1"
                 Content="7"
-                Click="xButton_NumPad_Seven_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
-        <Button Name="xButton_NumPad_Eight"
-                Grid.Row="1" Grid.Column="1"
+        <Button Grid.Row="1" Grid.Column="1"
                 Content="8"
-                Click="xButton_NumPad_Eight_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
-        <Button Name="xButton_NumPad_Nine"
-                Grid.Row="1" Grid.Column="2"
+        <Button Grid.Row="1" Grid.Column="2"
                 Content="9"
-                Click="xButton_NumPad_Nine_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
 
-        <Button Name="xButton_NumPad_Four"
-                Grid.Row="2"
+        <Button Grid.Row="2"
                 Content="4"
-                Click="xButton_NumPad_Four_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
-        <Button Name="xButton_NumPad_Five"
-                Grid.Row="2" Grid.Column="1"
+        <Button Grid.Row="2" Grid.Column="1"
                 Content="5"
-                Click="xButton_NumPad_Five_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
-        <Button Name="xButton_NumPad_Six"
-                Grid.Row="2" Grid.Column="2"
+        <Button Grid.Row="2" Grid.Column="2"
                 Content="6"
-                Click="xButton_NumPad_Six_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
 
-        <Button Name="xButton_NumPad_One"
-                Grid.Row="3"
+        <Button Grid.Row="3"
                 Content="1"
-                Click="xButton_NumPad_One_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
-        <Button Name="xButton_NumPad_Two"
-                Grid.Row="3" Grid.Column="1"
+        <Button Grid.Row="3" Grid.Column="1"
                 Content="2"
-                Click="xButton_NumPad_Two_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
-        <Button Name="xButton_NumPad_Three"
-                Grid.Row="3" Grid.Column="2"
+        <Button Grid.Row="3" Grid.Column="2"
                 Content="3"
-                Click="xButton_NumPad_Three_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
 
-        <Button Name="xButton_NumPad_Zero"
-                Grid.Row="4" Grid.Column="1"
+        <Button Grid.Row="4" Grid.Column="1"
                 Content="0"
-                Click="xButton_NumPad_Zero_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
 
-        <Button Name="xButton_NumPad_Dot"
-                Grid.Row="4" Grid.Column="2"
+        <Button Grid.Row="4" Grid.Column="2"
                 Content="."
-                Click="xButton_NumPad_Dot_Click"/>
+                Click="xButton_NumPad_Click_Normal"/>
       </Grid>
     </UniformGrid>
   </DockPanel>
