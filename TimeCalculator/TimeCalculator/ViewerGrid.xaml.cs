@@ -8,9 +8,12 @@ namespace TimeCalculator
     /// </summary>
     public partial class ViewerGrid : UserControl
     {
+        private const string INIT_TIME_VALUE = "0";
         public ViewerGrid()
         {
             InitializeComponent();
+
+            xTextBlock_Time.Text = INIT_TIME_VALUE;
         }
 
         public void UpdateTime(List<double> times)
@@ -23,12 +26,12 @@ namespace TimeCalculator
 
         public ETimeUnit GetTimeUnit()
         {
-            return (ETimeUnit)xComboBox_TimeUnit.SelectedIndex;
+            return (ETimeUnit)xComboBox_TimeUnit.SelectedItem;
         }
 
         public void SetTimeUnit(ETimeUnit timeUnit)
         {
-            xComboBox_TimeUnit.SelectedIndex = (int)timeUnit;
+            xComboBox_TimeUnit.SelectedItem = timeUnit;
         }
     }
 }

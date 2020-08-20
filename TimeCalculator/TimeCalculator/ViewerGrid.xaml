@@ -13,21 +13,10 @@
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <TextBlock Name="xTextBlock_Time"
-               Style="{StaticResource Styles.Viewer.TextBlock}"
-               Text="0"/>
+    <TextBlock Name="xTextBlock_Time" Style="{StaticResource Styles.Viewer.TextBlock}"/>
 
     <ComboBox Name="xComboBox_TimeUnit"
               Grid.Row="1"
-              Style="{StaticResource Styles.Viewer.ComboBox}">
-      <ComboBoxItem>마이크로초</ComboBoxItem>
-      <ComboBoxItem>밀리초</ComboBoxItem>
-      <ComboBoxItem>초</ComboBoxItem>
-      <ComboBoxItem>분</ComboBoxItem>
-      <ComboBoxItem>시간</ComboBoxItem>
-      <ComboBoxItem>일</ComboBoxItem>
-      <ComboBoxItem>주</ComboBoxItem>
-      <ComboBoxItem>년</ComboBoxItem>
-    </ComboBox>
+              Style="{StaticResource Styles.Viewer.ComboBox}"/>
   </Grid>
 </UserControl>
