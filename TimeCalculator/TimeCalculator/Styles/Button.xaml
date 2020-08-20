@@ -18,7 +18,8 @@
         <ControlTemplate TargetType="Button">
           <Border Background="{TemplateBinding Background}">
             <Viewbox>
-              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+              <ContentPresenter Margin="10" HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
             </Viewbox>
           </Border>
         </ControlTemplate>
