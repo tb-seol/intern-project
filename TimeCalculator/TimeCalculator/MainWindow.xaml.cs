@@ -11,8 +11,8 @@ namespace TimeCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static string OTHER_TIMES_TITLE = "대략 같음";
-        private static string[] OTHER_TIMES_VALUES = new string[] { "yr", "주", "d", "시간", "분", "s", "ms", "us" };
+        private static string SUB_VIEWER_TITLE = "대략 같음";
+        private static string[] SUB_VIEWER_VALUES = new string[] { "yr", "주", "d", "시간", "분", "s", "ms", "us" };
 
         private Time mTime;
         private ETimeUnit mTopViewerDefaultUnit = ETimeUnit.Minute;
@@ -142,7 +142,7 @@ namespace TimeCalculator
                 {
                     sb.Append(formatTimeValue(value))
                         .Append(" ")
-                        .Append(OTHER_TIMES_VALUES[i])
+                        .Append(SUB_VIEWER_VALUES[i])
                         .Append("   ");
                 }
             }
@@ -150,7 +150,7 @@ namespace TimeCalculator
             xViewerGrid_Top.UpdateTime(times);
             xViewerGrid_Bottom.UpdateTime(times);
 
-            string title = (sb.Length > 0) ? OTHER_TIMES_TITLE : "";
+            string title = (sb.Length > 0) ? SUB_VIEWER_TITLE : "";
             xTextBlock_SubViewerTitle.Text = title;
             xTextBlock_SubViewerBody.Text = sb.ToString();
         }
