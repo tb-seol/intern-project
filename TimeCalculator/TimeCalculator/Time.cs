@@ -58,7 +58,7 @@ namespace TimeCalculator
                 return;
             }
 
-            if (bUsedDecimalPoint &&
+            if (!bUsedDecimalPoint &&
                 mInputCharacters.Length == MAX_LENGTH_WITHOUT_DECIMAL_POINT)
             {
                 return;
