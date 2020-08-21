@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace TimeCalculator
 {
@@ -66,12 +67,15 @@ namespace TimeCalculator
         private void xButton_NumPad_Click_Normal(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            char character = char.Parse(button.Content.ToString());
+            if (button != null)
+            {
+                char character = char.Parse(button.Content.ToString());
 
-            Debug.Assert(character >= '0' && character <= '9' || character == '.');
+                Debug.Assert(character >= '0' && character <= '9' || character == '.');
 
-            mTime.AppendCharacter(character);
-            updateViewer();
+                mTime.AppendCharacter(character);
+                updateViewer();
+            }
         }
 
         private void XTextBlock_Time_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -139,6 +143,59 @@ namespace TimeCalculator
             }
 
             return formattedTimes;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            Window source = e.Source as Window;
+            if (source != null)
+            {
+                switch (e.Key)
+                {
+                    case Key.Escape:
+                    case Key.Delete:
+                        xButton_NumPad_Clear.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.Back:
+                        xButton_NumPad_Delete.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad0:
+                        xButton_NumPad_Zero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad1:
+                        xButton_NumPad_One.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad2:
+                        xButton_NumPad_Two.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad3:
+                        xButton_NumPad_Three.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad4:
+                        xButton_NumPad_Four.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad5:
+                        xButton_NumPad_Five.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad6:
+                        xButton_NumPad_Six.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad7:
+                        xButton_NumPad_Seven.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad8:
+                        xButton_NumPad_Eight.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad9:
+                        xButton_NumPad_Nine.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.Decimal:
+                        xButton_NumPad_Decimal.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }
