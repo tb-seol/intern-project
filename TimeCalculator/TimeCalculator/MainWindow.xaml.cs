@@ -1,201 +1,198 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-
-namespace TimeCalculator
+﻿namespace TimeCalculator
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindow.xaml.
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static string MINI_VIEWER_TITLE = "대략 같음";
-        private static string[] MINI_VIEWER_VALUES = new string[] { "yr", "주", "d", "시간", "분", "s", "ms", "us" };
+        private const string MINI_VIEWER_TITLE = "대략 같음";
+        private static readonly string[] MINI_VIEWER_VALUES = new string[] { "yr", "주", "d", "시간", "분", "s", "ms", "us" };
 
-        private Time mTime;
-        private ViewerGrid mMainViewer;
-        private ViewerGrid mSubViewer;
-        private ETimeUnit mTopViewerDefaultUnit = ETimeUnit.Minute;
-        private ETimeUnit mBottomViewerDefaultUnit = ETimeUnit.Hour;
+        private readonly Time _time;
+        private readonly ETimeUnit _topViewerDefaultUnit = ETimeUnit.Minute;
+        private readonly ETimeUnit _bottomViewerDefaultUnit = ETimeUnit.Hour;
+        private ViewerGrid _mainViewer;
+        private ViewerGrid _subViewer;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
+            this.DataContext = this;
+            this.xViewerGrid_Top.SetTimeUnit(this._topViewerDefaultUnit);
+            this.xViewerGrid_Bottom.SetTimeUnit(this._bottomViewerDefaultUnit);
+            SetMainViewer(this.xViewerGrid_Top);
+            SetSubViewer(this.xViewerGrid_Bottom);
 
-            xViewerGrid_Top.SetTimeUnit(mTopViewerDefaultUnit);
-            xViewerGrid_Bottom.SetTimeUnit(mBottomViewerDefaultUnit);
+            this._time = new Time(this._mainViewer.GetTimeUnit());
 
-            mMainViewer = xViewerGrid_Top;
-            mSubViewer = xViewerGrid_Bottom;
-
-            mTime = new Time(mMainViewer.GetTimeUnit());
-
-            xViewerGrid_Top.xTextBlock_Time.MouseDown += XTextBlock_Time_MouseDown;
-            xViewerGrid_Bottom.xTextBlock_Time.MouseDown += XTextBlock_Time_MouseDown;
-
-            xViewerGrid_Top.xComboBox_TimeUnit.SelectionChanged += XComboBox_TimeUnit_SelectionChanged;
-            xViewerGrid_Bottom.xComboBox_TimeUnit.SelectionChanged += XComboBox_TimeUnit_SelectionChanged;
+            this.xViewerGrid_Top.xTextBlock_Time.MouseDown += XTextBlock_Time_MouseDown;
+            this.xViewerGrid_Bottom.xTextBlock_Time.MouseDown += XTextBlock_Time_MouseDown;
+            this.xViewerGrid_Top.xComboBox_TimeUnit.SelectionChanged += XComboBox_TimeUnit_SelectionChanged;
+            this.xViewerGrid_Bottom.xComboBox_TimeUnit.SelectionChanged += XComboBox_TimeUnit_SelectionChanged;
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
 
-            xViewerGrid_Top.xTextBlock_Time.MouseDown -= XTextBlock_Time_MouseDown;
-            xViewerGrid_Bottom.xTextBlock_Time.MouseDown -= XTextBlock_Time_MouseDown;
+            this.xViewerGrid_Top.xTextBlock_Time.MouseDown -= XTextBlock_Time_MouseDown;
+            this.xViewerGrid_Bottom.xTextBlock_Time.MouseDown -= XTextBlock_Time_MouseDown;
 
-            xViewerGrid_Top.xComboBox_TimeUnit.SelectionChanged -= XComboBox_TimeUnit_SelectionChanged;
-            xViewerGrid_Bottom.xComboBox_TimeUnit.SelectionChanged -= XComboBox_TimeUnit_SelectionChanged;
+            this.xViewerGrid_Top.xComboBox_TimeUnit.SelectionChanged -= XComboBox_TimeUnit_SelectionChanged;
+            this.xViewerGrid_Bottom.xComboBox_TimeUnit.SelectionChanged -= XComboBox_TimeUnit_SelectionChanged;
         }
 
-        private void xButton_NumPad_Click_Clear(object sender, RoutedEventArgs e)
+        private void XButton_NumPad_Click_Clear(object sender, RoutedEventArgs e)
         {
-            mTime.Clear();
-            updateViewer();
+            this._time.Clear();
+            UpdateViewer();
         }
 
-        private void xButton_NumPad_Click_Delete(object sender, RoutedEventArgs e)
+        private void XButton_NumPad_Click_Delete(object sender, RoutedEventArgs e)
         {
-            mTime.RemoveLastCharacter();
-            updateViewer();
+            this._time.RemoveLastCharacter();
+            UpdateViewer();
         }
 
-        private void xButton_NumPad_Click_Normal(object sender, RoutedEventArgs e)
+        private void XButton_NumPad_Click_Normal(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
+            var button = sender as Button;
             if (button != null)
             {
                 char character = char.Parse(button.Content.ToString());
-
-                Debug.Assert(character >= '0' && character <= '9' || character == '.');
-
-                mTime.AppendCharacter(character);
-                updateViewer();
+                this._time.AppendCharacter(character);
+                UpdateViewer();
             }
         }
 
         private void XTextBlock_Time_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (sender == mMainViewer.xTextBlock_Time)
-            {
+            if (sender == this._mainViewer.xTextBlock_Time)
                 return;
-            }
 
-            ViewerGrid temp = mMainViewer;
-            mMainViewer = mSubViewer;
-            mSubViewer = temp;
+            SwapMainViewer();
 
-            mTime.UnitForConvert = mMainViewer.GetTimeUnit();
-            mTime.Clear();
+            this._time.UnitForConvert = this._mainViewer.GetTimeUnit();
+            this._time.Clear();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            var source = e.Source as Window;
+            if (source != null)
+                switch (e.Key)
+                {
+                    case Key.Escape:
+                    case Key.Delete:
+                        this.xButton_NumPad_Clear.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.Back:
+                        this.xButton_NumPad_Delete.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad0:
+                        this.xButton_NumPad_Zero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad1:
+                        this.xButton_NumPad_One.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad2:
+                        this.xButton_NumPad_Two.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad3:
+                        this.xButton_NumPad_Three.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad4:
+                        this.xButton_NumPad_Four.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad5:
+                        this.xButton_NumPad_Five.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad6:
+                        this.xButton_NumPad_Six.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad7:
+                        this.xButton_NumPad_Seven.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad8:
+                        this.xButton_NumPad_Eight.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.NumPad9:
+                        this.xButton_NumPad_Nine.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    case Key.Decimal:
+                        this.xButton_NumPad_Decimal.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    default:
+                        break;
+                }
         }
 
         private void XComboBox_TimeUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            mTime.UnitForConvert = mMainViewer.GetTimeUnit();
-            updateViewer();
+            this._time.UnitForConvert = this._mainViewer.GetTimeUnit();
+            UpdateViewer();
         }
 
-        private void updateViewer()
+        private void UpdateViewer()
         {
-            List<double> times = mTime.GetAllTimes();
-            string miniViewerTitle = (times[0] > 0) ? MINI_VIEWER_TITLE : "";
+            List<double> times = this._time.GetAllTimes();
+            string miniViewerTitle = (times[0] > 0) ? MINI_VIEWER_TITLE : string.Empty;
 
-            xViewerGrid_Top.UpdateTime(times);
-            xViewerGrid_Bottom.UpdateTime(times);
+            this.xViewerGrid_Top.UpdateTime(times);
+            this.xViewerGrid_Bottom.UpdateTime(times);
 
-            xTextBlock_MiniViewerTitle.Text = miniViewerTitle;
-            xItemsControl_MiniViewerValues.ItemsSource = formatMiniViewerTimes(times);
+            this.xTextBlock_MiniViewerTitle.Text = miniViewerTitle;
+            this.xItemsControl_MiniViewerValues.ItemsSource = FormatMiniViewerTimes(times);
         }
 
-        private string formatMiniViewerTime(double time)
+        private static string FormatMiniViewerTime(double time)
         {
             if (time < 10)
-            {
                 return Math.Round(time, 2).ToString();
-            }
-
-            return Math.Round(time).ToString("N0");
+            else
+                return Math.Round(time).ToString("N0");
         }
 
-        private List<string> formatMiniViewerTimes(List<double> times)
+        private List<string> FormatMiniViewerTimes(List<double> times)
         {
             const double MIN_VALUE = 0.01;
-
-            List<string> formattedTimes = new List<string>(16);
-
+            var formattedTimes = new List<string>(16);
             for (int i = 0; i < times.Count; i++)
             {
-                if (i == (int)mMainViewer.GetTimeUnit() || i == (int)mSubViewer.GetTimeUnit())
-                {
+                if (i == (int)this._mainViewer.GetTimeUnit() || i == (int)this._subViewer.GetTimeUnit())
                     continue;
-                }
 
                 double time = times[times.Count - 1 - i];
-
                 if (time >= MIN_VALUE)
-                {
-                    formattedTimes.Add(formatMiniViewerTime(time) + MINI_VIEWER_VALUES[i] + "  ");
-                }
+                    formattedTimes.Add(FormatMiniViewerTime(time) + MINI_VIEWER_VALUES[i] + "  ");
             }
 
             return formattedTimes;
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void SetMainViewer(ViewerGrid viewer)
         {
-            Window source = e.Source as Window;
-            if (source != null)
-            {
-                switch (e.Key)
-                {
-                    case Key.Escape:
-                    case Key.Delete:
-                        xButton_NumPad_Clear.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.Back:
-                        xButton_NumPad_Delete.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad0:
-                        xButton_NumPad_Zero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad1:
-                        xButton_NumPad_One.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad2:
-                        xButton_NumPad_Two.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad3:
-                        xButton_NumPad_Three.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad4:
-                        xButton_NumPad_Four.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad5:
-                        xButton_NumPad_Five.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad6:
-                        xButton_NumPad_Six.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad7:
-                        xButton_NumPad_Seven.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad8:
-                        xButton_NumPad_Eight.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad9:
-                        xButton_NumPad_Nine.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.Decimal:
-                        xButton_NumPad_Decimal.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    default:
-                        break;
-                }
-            }
+            this._mainViewer = viewer;
+            this._mainViewer.xTextBlock_Time.FontWeight = FontWeights.Bold;
+        }
+
+        private void SetSubViewer(ViewerGrid viewer)
+        {
+            this._subViewer = viewer;
+            this._subViewer.xTextBlock_Time.FontWeight = FontWeights.Normal;
+        }
+
+        private void SwapMainViewer()
+        {
+            ViewerGrid temp = this._mainViewer;
+            SetMainViewer(this._subViewer);
+            SetSubViewer(temp);
         }
     }
 }
