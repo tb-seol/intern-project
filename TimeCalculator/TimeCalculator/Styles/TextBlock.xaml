@@ -14,5 +14,6 @@
     <Setter Property="Background" Value="{StaticResource Brushes.Viewer.TextBlock.Background.Default}"/>
     <Setter Property="FontSize" Value="30"/>
     <Setter Property="Padding" Value="10"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
   </Style>
 </ResourceDictionary>
