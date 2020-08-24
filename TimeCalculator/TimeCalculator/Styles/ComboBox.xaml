@@ -339,6 +339,13 @@
     <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
     <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
     <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
+    <Setter Property="ItemTemplate">
+      <Setter.Value>
+        <DataTemplate>
+          <TextBlock Text="{Binding Converter={StaticResource cvt_EnumDescription}}"/>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
     <Style.Triggers>
       <Trigger Property="IsEditable" Value="true">
         <Setter Property="IsTabStop" Value="false"/>

@@ -9,6 +9,7 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
           <local:IsLessThanMultiConverter x:Key="mcvt_IsLessThan"/>
+          <local:EnumDescriptionConverter x:Key="cvt_EnumDescription"/>
         </ResourceDictionary>
 
         <ResourceDictionary>
