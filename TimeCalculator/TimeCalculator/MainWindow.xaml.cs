@@ -84,53 +84,51 @@
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            var source = e.Source as Window;
-            if (source != null)
-                switch (e.Key)
-                {
-                    case Key.Escape:
-                    case Key.Delete:
-                        this.xButton_NumPad_Clear.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.Back:
-                        this.xButton_NumPad_Delete.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad0:
-                        this.xButton_NumPad_Zero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad1:
-                        this.xButton_NumPad_One.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad2:
-                        this.xButton_NumPad_Two.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad3:
-                        this.xButton_NumPad_Three.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad4:
-                        this.xButton_NumPad_Four.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad5:
-                        this.xButton_NumPad_Five.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad6:
-                        this.xButton_NumPad_Six.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad7:
-                        this.xButton_NumPad_Seven.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad8:
-                        this.xButton_NumPad_Eight.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.NumPad9:
-                        this.xButton_NumPad_Nine.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    case Key.Decimal:
-                        this.xButton_NumPad_Decimal.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    default:
-                        break;
-                }
+            switch (e.Key)
+            {
+                case Key.Escape:
+                case Key.Delete:
+                    this.xButton_NumPad_Clear.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Back:
+                    this.xButton_NumPad_Delete.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad0:
+                    this.xButton_NumPad_Zero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad1:
+                    this.xButton_NumPad_One.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad2:
+                    this.xButton_NumPad_Two.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad3:
+                    this.xButton_NumPad_Three.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad4:
+                    this.xButton_NumPad_Four.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad5:
+                    this.xButton_NumPad_Five.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad6:
+                    this.xButton_NumPad_Six.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad7:
+                    this.xButton_NumPad_Seven.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad8:
+                    this.xButton_NumPad_Eight.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.NumPad9:
+                    this.xButton_NumPad_Nine.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                case Key.Decimal:
+                    this.xButton_NumPad_Decimal.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void XComboBox_TimeUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
