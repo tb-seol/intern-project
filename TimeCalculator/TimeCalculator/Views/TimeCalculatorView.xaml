@@ -9,6 +9,15 @@
   <UserControl.Resources>
     <sys:Char x:Key="charValue_0">0</sys:Char>
     <sys:Char x:Key="charValue_1">1</sys:Char>
+    <sys:Char x:Key="charValue_2">2</sys:Char>
+    <sys:Char x:Key="charValue_3">3</sys:Char>
+    <sys:Char x:Key="charValue_4">4</sys:Char>
+    <sys:Char x:Key="charValue_5">5</sys:Char>
+    <sys:Char x:Key="charValue_6">6</sys:Char>
+    <sys:Char x:Key="charValue_7">7</sys:Char>
+    <sys:Char x:Key="charValue_8">8</sys:Char>
+    <sys:Char x:Key="charValue_9">9</sys:Char>
+    <sys:Char x:Key="charValue_Decimal">.</sys:Char>
   </UserControl.Resources>
   <UserControl.InputBindings>
     <KeyBinding Key="NumPad0"
@@ -19,38 +28,35 @@
                 CommandParameter="{StaticResource charValue_1}"/>
     <KeyBinding Key="NumPad2"
                 Command="{Binding InputCommand}"
-                CommandParameter="2"/>
+                CommandParameter="{StaticResource charValue_2}"/>
     <KeyBinding Key="NumPad3"
                 Command="{Binding InputCommand}"
-                CommandParameter="3"/>
+                CommandParameter="{StaticResource charValue_3}"/>
     <KeyBinding Key="NumPad4"
                 Command="{Binding InputCommand}"
-                CommandParameter="4"/>
+                CommandParameter="{StaticResource charValue_4}"/>
     <KeyBinding Key="NumPad5"
                 Command="{Binding InputCommand}"
-                CommandParameter="5"/>
+                CommandParameter="{StaticResource charValue_5}"/>
     <KeyBinding Key="NumPad6"
                 Command="{Binding InputCommand}"
-                CommandParameter="6"/>
+                CommandParameter="{StaticResource charValue_6}"/>
     <KeyBinding Key="NumPad7"
                 Command="{Binding InputCommand}"
-                CommandParameter="7"/>
+                CommandParameter="{StaticResource charValue_7}"/>
     <KeyBinding Key="NumPad8"
                 Command="{Binding InputCommand}"
-                CommandParameter="8"/>
+                CommandParameter="{StaticResource charValue_8}"/>
     <KeyBinding Key="NumPad9"
                 Command="{Binding InputCommand}"
-                CommandParameter="9"/>
+                CommandParameter="{StaticResource charValue_9}"/>
     <KeyBinding Key="Decimal"
                 Command="{Binding InputCommand}"
-                CommandParameter="."/>
+                CommandParameter="{StaticResource charValue_Decimal}"/>
+
     <KeyBinding Key="Esc" Command="{Binding ClearCommand}"/>
     <KeyBinding Key="Delete" Command="{Binding ClearCommand}"/>
     <KeyBinding Key="Backspace" Command="{Binding DeleteCommand}"/>
-
-    <MouseBinding MouseAction="LeftClick"
-                  Command="{Binding InputCommand}"
-                  CommandParameter="0"/>
   </UserControl.InputBindings>
   <DockPanel Style="{StaticResource Styles.Main.Window}">
     <TextBlock DockPanel.Dock="Top"
@@ -58,19 +64,14 @@
                Text="시간"/>
     <UniformGrid Style="{StaticResource Styles.Main.Content}">
       <Grid>
-        <!--
         <Grid.RowDefinitions>
           <RowDefinition Height="4*"/>
           <RowDefinition Height="4*"/>
           <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <local:ViewerGrid x:Name="xViewerGrid_Top"/>
-        <local:ViewerGrid x:Name="xViewerGrid_Bottom" Grid.Row="1"/>
-        -->
-
-        <StackPanel Grid.Row="2" VerticalAlignment="Center">
-          <TextBlock Text="{Binding MainTime, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel VerticalAlignment="Center">
+          <TextBlock Text="{Binding TopViewer.Time, UpdateSourceTrigger=PropertyChanged}"/>
           <ComboBox ItemsSource="{Binding Source={StaticResource ETimeUnitValues}}" SelectedItem="{Binding TopViewer.SelectedTimeUnit, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
               <DataTemplate>
@@ -78,8 +79,10 @@
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>
+        </StackPanel>
 
-          <TextBlock Text="{Binding SubTime, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+          <TextBlock Text="{Binding BottomViewer.Time, UpdateSourceTrigger=PropertyChanged}"/>
           <ComboBox ItemsSource="{Binding Source={StaticResource ETimeUnitValues}}" SelectedItem="{Binding BottomViewer.SelectedTimeUnit, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
               <DataTemplate>
@@ -87,7 +90,9 @@
               </DataTemplate>
             </ComboBox.ItemTemplate>
           </ComboBox>
+        </StackPanel>
 
+        <StackPanel Grid.Row="2" VerticalAlignment="Center">
           <TextBlock Name="xTextBlock_MiniViewerTitle"/>
           <ItemsControl Name="xItemsControl_MiniViewerValues" Focusable="False">
             <ItemsControl.ItemsPanel>
@@ -113,36 +118,60 @@
           <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid.InputBindings/>
-
-        <Button Grid.Column="1" Content="CE"/>
-        <Button Grid.Column="2" Content="DEL"/>
+        <Button Grid.Column="1"
+                Content="CE"
+                Command="{Binding ClearCommand}"/>
+        <Button Grid.Column="2"
+                Content="DEL"
+                Command="{Binding DeleteCommand}"/>
 
         <Button Grid.Row="1"
                 Content="7"
                 Command="{Binding InputCommand}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"/>
+                CommandParameter="{StaticResource charValue_7}"/>
         <Button Grid.Row="1" Grid.Column="1"
-                Content="8"/>
+                Content="8"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_8}"/>
         <Button Grid.Row="1" Grid.Column="2"
-                Content="9"/>
+                Content="9"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_9}"/>
 
-        <Button Grid.Row="2" Content="4"/>
+        <Button Grid.Row="2"
+                Content="4"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_4}"/>
         <Button Grid.Row="2" Grid.Column="1"
-                Content="5"/>
+                Content="5"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_5}"/>
         <Button Grid.Row="2" Grid.Column="2"
-                Content="6"/>
+                Content="6"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_6}"/>
 
-        <Button Grid.Row="3" Content="1"/>
+        <Button Grid.Row="3"
+                Content="1"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_1}"/>
         <Button Grid.Row="3" Grid.Column="1"
-                Content="2"/>
+                Content="2"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_2}"/>
         <Button Grid.Row="3" Grid.Column="2"
-                Content="3"/>
+                Content="3"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_3}"/>
 
         <Button Grid.Row="4" Grid.Column="1"
-                Content="0"/>
+                Content="0"
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_0}"/>
         <Button Grid.Row="4" Grid.Column="2"
-                Content="."/>
+                Content="."
+                Command="{Binding InputCommand}"
+                CommandParameter="{StaticResource charValue_Decimal}"/>
       </Grid>
     </UniformGrid>
   </DockPanel>

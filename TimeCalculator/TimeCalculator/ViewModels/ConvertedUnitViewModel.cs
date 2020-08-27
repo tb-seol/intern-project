@@ -22,8 +22,6 @@
             get => this._selectedTimeUnit;
             set => SetProperty(ref this._selectedTimeUnit, value);
         }
-
-        public bool IsMainViewer { get; set; }
         #endregion
 
         public void UpdateTime(double newTime)

@@ -12,19 +12,18 @@
 
         public TimeBuilder()
         {
+            this._inputCharacters.Append('0');
         }
 
         public double ToBuild()
         {
-            if (this._inputCharacters.Length == 0)
-                return 0.0d;
-            else
-                return double.Parse(this._inputCharacters.ToString());
+            return double.Parse(this._inputCharacters.ToString());
         }
 
         public void Clear()
         {
             this._inputCharacters.Clear();
+            this._inputCharacters.Append('0');
             this._isUsedDecimalPoint = false;
         }
 
@@ -51,14 +50,14 @@
 
                 this._isUsedDecimalPoint = true;
             }
+            else
+                RemoveFirstZero();
 
             this._inputCharacters.Append(character);
         }
 
         private bool CanAppend()
         {
-            TrimStartZero();
-
             if (this._inputCharacters.Length == MAX_LENGTH)
                 return false;
 
@@ -77,21 +76,13 @@
                 return false;
         }
 
-        private void TrimStartZero()
+        private void RemoveFirstZero()
         {
-            if (this._inputCharacters.Length < 2)
+            if (this._inputCharacters.Length > 1)
                 return;
 
-            while (true)
-            {
-                if (this._inputCharacters.Length == 1)
-                    return;
-
-                if (this._inputCharacters[0] != '0')
-                    return;
-
+            if (this._inputCharacters[0] == '0')
                 this._inputCharacters.Remove(0, 1);
-            }
         }
     }
 }

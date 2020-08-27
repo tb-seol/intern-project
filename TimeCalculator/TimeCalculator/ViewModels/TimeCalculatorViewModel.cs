@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
     using Saige.MVVM;
     using TimeCalculator.Models;
 
@@ -12,34 +11,6 @@
         private readonly List<double> _times = new List<double>();
         private readonly int _timeUnitCount = Enum.GetNames(typeof(ETimeUnit)).Length;
 
-        /*
-        private string _mainTime;
-        private string _subTime;
-        private ETimeUnit _mainTimeUnit;
-        private ETimeUnit _subTimeUnit;
-
-        #region Properties
-        public string MainTime
-        {
-            get => this._mainTime;
-            private set => SetProperty(ref this._mainTime, value);
-        }
-        public string SubTime
-        {
-            get => this._subTime;
-            private set => SetProperty(ref this._subTime, value);
-        }
-        public ETimeUnit SelectedMainTimeUnit
-        {
-            get => this._mainTimeUnit;
-            set => SetProperty(ref this._mainTimeUnit, value);
-        }
-        public ETimeUnit SelectedSubTimeUnit
-        {
-            get => this._subTimeUnit;
-            set => SetProperty(ref this._subTimeUnit, value);
-        }
-        */
         #region Properties
         public ConvertedUnitViewModel TopViewer { get; } = new ConvertedUnitViewModel();
         public ConvertedUnitViewModel BottomViewer { get; } = new ConvertedUnitViewModel();
@@ -55,52 +26,40 @@
             this.ClearCommand = new RelayCommand(Clear);
             this.DeleteCommand = new RelayCommand(RemoveLastCharacter);
 
-            this.TopViewer.IsMainViewer = true;
-
             for (int i = 0; i < this._timeUnitCount; i++)
                 this._times.Add(0);
 
-            UpdateCurrentTime();
-            UpdateViewer();
-        }
-
-        protected override void OnPropertyChanged(object oldValue, object newValue, [CallerMemberName] string propertyName = null)
-        {
-            base.OnPropertyChanged(oldValue, newValue, propertyName);
-            switch (propertyName)
-            {
-                case nameof(ConvertedUnitViewModel.SelectedTimeUnit):
-                    UpdateViewer();
-                    break;
-                default:
-                    break;
-            }
+            Update();
         }
 
         public void AppendCharacter(char character)
         {
             this._timeBuilder.AppendCharacter(character);
-            UpdateCurrentTime();
+            Update();
         }
 
         public void Clear()
         {
             this._timeBuilder.Clear();
-            UpdateCurrentTime();
+            Update();
         }
 
         public void RemoveLastCharacter()
         {
             this._timeBuilder.RemoveLastCharacter();
+            Update();
+        }
+
+        private void Update()
+        {
             UpdateCurrentTime();
+            UpdateViewer();
         }
 
         private void UpdateCurrentTime()
         {
             double srcTime = this._timeBuilder.ToBuild();
-            ETimeUnit srcTimeUnit = this.TopViewer.IsMainViewer
-                ? this.TopViewer.SelectedTimeUnit
-                : this.BottomViewer.SelectedTimeUnit;
+            ETimeUnit srcTimeUnit = this.TopViewer.SelectedTimeUnit;
 
             for (int unitIndex = 0; unitIndex < this._timeUnitCount; unitIndex++)
             {
