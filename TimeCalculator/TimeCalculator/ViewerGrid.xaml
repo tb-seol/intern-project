@@ -17,6 +17,7 @@
 
     <ComboBox Name="xComboBox_TimeUnit"
               Grid.Row="1"
-              Style="{StaticResource Styles.Viewer.ComboBox}"/>
+              Style="{StaticResource Styles.Viewer.ComboBox}"
+              SelectedItem=""/>
   </Grid>
 </UserControl>

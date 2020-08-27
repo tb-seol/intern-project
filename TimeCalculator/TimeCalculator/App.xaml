@@ -10,6 +10,7 @@
         <ResourceDictionary>
           <local:IsLessThanMultiConverter x:Key="mcvt_IsLessThan"/>
           <local:EnumDescriptionConverter x:Key="cvt_EnumDescription"/>
+          <local:StringToCharConverter x:Key="cvt_StringToChar"/>
         </ResourceDictionary>
 
         <ResourceDictionary>

@@ -4,123 +4,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TimeCalculator"
+        xmlns:view="clr-namespace:TimeCalculator.Views"
+        xmlns:vm="clr-namespace:TimeCalculator.ViewModels"
         Title="시간 계산기"
         MinWidth="340"
         MinHeight="510"
         Width="700"
         Height="550"
-        KeyDown="Window_KeyDown"
+        FocusManager.FocusedElement="{Binding ElementName=TimeCalcView}"
         mc:Ignorable="d">
-  <DockPanel Style="{StaticResource Styles.Main.Window}">
-    <TextBlock DockPanel.Dock="Top"
-               Style="{StaticResource Styles.Main.Header}"
-               Text="시간"/>
-    <UniformGrid Style="{StaticResource Styles.Main.Content}">
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="4*"/>
-          <RowDefinition Height="4*"/>
-          <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-
-        <local:ViewerGrid x:Name="xViewerGrid_Top"/>
-        <local:ViewerGrid x:Name="xViewerGrid_Bottom" Grid.Row="1"/>
-
-        <StackPanel Grid.Row="2" VerticalAlignment="Center">
-          <TextBlock Name="xTextBlock_MiniViewerTitle"/>
-          <ItemsControl Name="xItemsControl_MiniViewerValues">
-            <ItemsControl.ItemsPanel>
-              <ItemsPanelTemplate>
-                <VirtualizingStackPanel Orientation="Horizontal"/>
-              </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-          </ItemsControl>
-        </StackPanel>
-      </Grid>
-
-      <Grid Grid.Column="1" Style="{StaticResource Styles.NumPad}">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*"/>
-          <ColumnDefinition Width="*"/>
-          <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <Button Name="xButton_NumPad_Clear"
-                Grid.Column="1"
-                Content="CE"
-                Click="XButton_NumPad_Click_Clear"/>
-
-        <Button Name="xButton_NumPad_Delete"
-                Grid.Column="2"
-                Content="DEL"
-                Click="XButton_NumPad_Click_Delete"/>
-
-
-        <Button Name="xButton_NumPad_Seven"
-                Grid.Row="1"
-                Content="7"
-                Click="XButton_NumPad_Click_Normal"/>
-
-        <Button Name="xButton_NumPad_Eight"
-                Grid.Row="1" Grid.Column="1"
-                Content="8"
-                Click="XButton_NumPad_Click_Normal"/>
-
-        <Button Name="xButton_NumPad_Nine"
-                Grid.Row="1" Grid.Column="2"
-                Content="9"
-                Click="XButton_NumPad_Click_Normal"/>
-
-
-        <Button Name="xButton_NumPad_Four"
-                Grid.Row="2"
-                Content="4"
-                Click="XButton_NumPad_Click_Normal"/>
-
-        <Button Name="xButton_NumPad_Five"
-                Grid.Row="2" Grid.Column="1"
-                Content="5"
-                Click="XButton_NumPad_Click_Normal"/>
-
-        <Button Name="xButton_NumPad_Six"
-                Grid.Row="2" Grid.Column="2"
-                Content="6"
-                Click="XButton_NumPad_Click_Normal"/>
-
-
-        <Button Name="xButton_NumPad_One"
-                Grid.Row="3"
-                Content="1"
-                Click="XButton_NumPad_Click_Normal"/>
-
-        <Button Name="xButton_NumPad_Two"
-                Grid.Row="3" Grid.Column="1"
-                Content="2"
-                Click="XButton_NumPad_Click_Normal"/>
-
-        <Button Name="xButton_NumPad_Three"
-                Grid.Row="3" Grid.Column="2"
-                Content="3"
-                Click="XButton_NumPad_Click_Normal"/>
-
-
-        <Button Name="xButton_NumPad_Zero"
-                Grid.Row="4" Grid.Column="1"
-                Content="0"
-                Click="XButton_NumPad_Click_Normal"/>
-
-        <Button Name="xButton_NumPad_Decimal"
-                Grid.Row="4" Grid.Column="2"
-                Content="."
-                Click="XButton_NumPad_Click_Normal"/>
-      </Grid>
-    </UniformGrid>
-  </DockPanel>
+  <Grid>
+    <view:TimeCalculatorView x:Name="TimeCalcView">
+      <view:TimeCalculatorView.DataContext>
+        <vm:TimeCalculatorViewModel/>
+      </view:TimeCalculatorView.DataContext>
+    </view:TimeCalculatorView>
+  </Grid>
 </Window>
