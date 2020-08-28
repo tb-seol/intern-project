@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:TimeCalculator.Styles">
-  <Style x:Key="Styles.Main.Content" TargetType="UniformGrid">
+  <Style x:Key="Styles.UniformGrid.MainContent" TargetType="UniformGrid">
+    <Style.Resources/>
     <Style.Triggers>
       <DataTrigger>
         <DataTrigger.Binding>

@@ -4,10 +4,10 @@
 
     public class TimeBuilder
     {
-        private const int MAX_LENGTH = 16;
-        private const int MAX_LENGTH_WITHOUT_DECIMAL_POINT = MAX_LENGTH - 1;
+        private const int MAX_NUMBER_COUNT = 15;
 
-        private readonly StringBuilder _inputCharacters = new StringBuilder(MAX_LENGTH * 2);
+        private readonly StringBuilder _inputCharacters = new StringBuilder(MAX_NUMBER_COUNT * 2);
+        private uint _numberCount = 1;
         private bool _isUsedDecimalPoint;
 
         public TimeBuilder()
@@ -15,57 +15,66 @@
             this._inputCharacters.Append('0');
         }
 
-        public double ToBuild()
+        public void SetTime(string time)
         {
-            return double.Parse(this._inputCharacters.ToString());
+            this._inputCharacters.Clear();
+            this._inputCharacters.Append(time);
+
+            if (time.Contains('.'))
+                this._isUsedDecimalPoint = true;
+
+            this._numberCount = (uint)time.Length;
+
+            if (this._isUsedDecimalPoint)
+                this._numberCount--;
+        }
+
+        public string ToBuild()
+        {
+            return this._inputCharacters.ToString();
         }
 
         public void Clear()
         {
             this._inputCharacters.Clear();
             this._inputCharacters.Append('0');
+            this._numberCount = 1;
             this._isUsedDecimalPoint = false;
         }
 
         public void RemoveLastCharacter()
         {
-            if (this._inputCharacters.Length == 0)
-                return;
-
-            if (this._inputCharacters[^1] == '.')
-                this._isUsedDecimalPoint = false;
-
-            this._inputCharacters.Length--;
+            if (this._inputCharacters.Length == 1)
+                this._inputCharacters[0] = '0';
+            else
+            {
+                if (this._inputCharacters[^1] == '.')
+                    this._isUsedDecimalPoint = false;
+                else
+                    this._numberCount--;
+                this._inputCharacters.Length--;
+            }
         }
 
         public void AppendCharacter(char character)
         {
-            if (CanAppend() == false && ValidateCharToAppend(character) == false)
+            if (CanAppend(character) == false && ValidateCharToAppend(character) == false)
                 return;
 
             if (character == '.')
-            {
-                if (this._isUsedDecimalPoint)
-                    return;
-
                 this._isUsedDecimalPoint = true;
-            }
-            else
-                RemoveFirstZero();
+            else if (TryRemoveFirstCharacterIfZero() == false)
+                this._numberCount++;
 
             this._inputCharacters.Append(character);
         }
 
-        private bool CanAppend()
+        private bool CanAppend(char input)
         {
-            if (this._inputCharacters.Length == MAX_LENGTH)
-                return false;
-
-            if (this._isUsedDecimalPoint == false &&
-                this._inputCharacters.Length == MAX_LENGTH_WITHOUT_DECIMAL_POINT)
-                return false;
-
-            return true;
+            if (input == '.')
+                return (this._isUsedDecimalPoint == false);
+            else
+                return this._numberCount < MAX_NUMBER_COUNT;
         }
 
         private static bool ValidateCharToAppend(char input)
@@ -76,13 +85,18 @@
                 return false;
         }
 
-        private void RemoveFirstZero()
+        private bool TryRemoveFirstCharacterIfZero()
         {
             if (this._inputCharacters.Length > 1)
-                return;
+                return false;
 
             if (this._inputCharacters[0] == '0')
+            {
                 this._inputCharacters.Remove(0, 1);
+                return true;
+            }
+
+            return false;
         }
     }
 }

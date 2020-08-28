@@ -1,13 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:TimeCalculator.Styles">
-  <!--#region Colors-->
-  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.Default" Color="{StaticResource Color.NumPad.Button.Background.Default}"/>
-  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.MouseOver" Color="{StaticResource Color.NumPad.Button.Background.MouseOver}"/>
-  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.Pressed" Color="{StaticResource Color.NumPad.Button.Background.Pressed}"/>
-  <!--#endregion-->
-
-  <Style x:Key="Styles.NumPad.Button" TargetType="Button">
+  <Style x:Key="Styles.Button.NumPad" TargetType="Button">
     <Setter Property="Background" Value="{StaticResource Brushes.NumPad.Button.Background.Default}"/>
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="Margin" Value="1"/>

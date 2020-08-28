@@ -32,11 +32,14 @@
                 "enum count does not match");
         }
 
-        public static double Convert(double srcTime, ETimeUnit srcTimeUnit, ETimeUnit destTimeUnit)
+        public static string Convert(string srcTime, ETimeUnit srcTimeUnit, ETimeUnit destTimeUnit)
         {
-            double microSeconds = GetMicroSecondsFrom(srcTime, srcTimeUnit);
+            double srcTimeValue = double.Parse(srcTime);
+
+            double microSeconds = GetMicroSecondsFrom(srcTimeValue, srcTimeUnit);
             double convertedTime = ConvertMicroSeconds(microSeconds, destTimeUnit);
-            return convertedTime;
+
+            return convertedTime.ToString();
         }
 
         private static double GetMicroSecondsFrom(double time, ETimeUnit timeUnit)

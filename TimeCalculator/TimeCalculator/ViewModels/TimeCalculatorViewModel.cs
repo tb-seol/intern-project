@@ -1,19 +1,27 @@
 ﻿namespace TimeCalculator.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using Saige.MVVM;
     using TimeCalculator.Models;
 
     public class TimeCalculatorViewModel : ViewModel
     {
         private readonly TimeBuilder _timeBuilder = new TimeBuilder();
-        private readonly List<double> _times = new List<double>();
-        private readonly int _timeUnitCount = Enum.GetNames(typeof(ETimeUnit)).Length;
+
+        private string _time;
+        private ETimeUnit _selectedTimeUnit;
 
         #region Properties
-        public ConvertedUnitViewModel TopViewer { get; } = new ConvertedUnitViewModel();
-        public ConvertedUnitViewModel BottomViewer { get; } = new ConvertedUnitViewModel();
+        public string Time
+        {
+            get => this._time;
+            private set => SetProperty(ref this._time, value);
+        }
+        public ETimeUnit SelectedTimeUnit
+        {
+            get => this._selectedTimeUnit;
+            set => SetProperty(ref this._selectedTimeUnit, value);
+        }
 
         public RelayCommand<char> InputCommand { get; private set; }
         public RelayCommand ClearCommand { get; private set; }
@@ -25,9 +33,6 @@
             this.InputCommand = new RelayCommand<char>(AppendCharacter);
             this.ClearCommand = new RelayCommand(Clear);
             this.DeleteCommand = new RelayCommand(RemoveLastCharacter);
-
-            for (int i = 0; i < this._timeUnitCount; i++)
-                this._times.Add(0);
 
             Update();
         }
@@ -50,28 +55,29 @@
             Update();
         }
 
-        private void Update()
+        protected override void OnPropertyChanged(object oldValue, object newValue, [CallerMemberName] string propertyName = null)
         {
-            UpdateCurrentTime();
-            UpdateViewer();
-        }
-
-        private void UpdateCurrentTime()
-        {
-            double srcTime = this._timeBuilder.ToBuild();
-            ETimeUnit srcTimeUnit = this.TopViewer.SelectedTimeUnit;
-
-            for (int unitIndex = 0; unitIndex < this._timeUnitCount; unitIndex++)
+            base.OnPropertyChanged(oldValue, newValue, propertyName);
+            switch (propertyName)
             {
-                var destTimeUnit = (ETimeUnit)unitIndex;
-                this._times[unitIndex] = TimeConverter.Convert(srcTime, srcTimeUnit, destTimeUnit);
+                case nameof(this.SelectedTimeUnit):
+                    ConvertTime((ETimeUnit)oldValue, (ETimeUnit)newValue);
+                    Update();
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void UpdateViewer()
+        private void Update()
         {
-            this.TopViewer.UpdateTime(this._times[(int)this.TopViewer.SelectedTimeUnit]);
-            this.BottomViewer.UpdateTime(this._times[(int)this.BottomViewer.SelectedTimeUnit]);
+            this.Time = this._timeBuilder.ToBuild();
+        }
+
+        private void ConvertTime(ETimeUnit oldUnit, ETimeUnit newUnit)
+        {
+            string newTime = TimeConverter.Convert(this._time, oldUnit, newUnit);
+            this._timeBuilder.SetTime(newTime);
         }
     }
 }

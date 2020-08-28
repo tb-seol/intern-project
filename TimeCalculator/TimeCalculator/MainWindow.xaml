@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:TimeCalculator"
         xmlns:view="clr-namespace:TimeCalculator.Views"
         xmlns:vm="clr-namespace:TimeCalculator.ViewModels"
         Title="시간 계산기"
@@ -12,6 +11,7 @@
         Width="700"
         Height="550"
         FocusManager.FocusedElement="{Binding ElementName=TimeCalcView}"
+        Background="{StaticResource Brushes.MainWindow.Background.Default}"
         mc:Ignorable="d">
   <Grid>
     <view:TimeCalculatorView x:Name="TimeCalcView">

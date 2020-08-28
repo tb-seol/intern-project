@@ -1,14 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:TimeCalculator.Styles">
-  <!--  MainWindow  -->
+  <!--#region Colors-->
   <Color x:Key="Color.MainWindow.Background">Linen</Color>
 
-  <!--  NumPad  -->
   <Color x:Key="Color.NumPad.Button.Background.Default">White</Color>
   <Color x:Key="Color.NumPad.Button.Background.MouseOver">MistyRose</Color>
   <Color x:Key="Color.NumPad.Button.Background.Pressed">LightGray</Color>
 
-  <!--  Viewer  -->
   <Color x:Key="Color.Viewer.Background.Default">Transparent</Color>
+  <!--#endregion-->
+
+  <!--#region Brushes-->
+  <SolidColorBrush x:Key="Brushes.MainWindow.Background.Default" Color="{StaticResource Color.MainWindow.Background}"/>
+
+  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.Default" Color="{StaticResource Color.NumPad.Button.Background.Default}"/>
+  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.MouseOver" Color="{StaticResource Color.NumPad.Button.Background.MouseOver}"/>
+  <SolidColorBrush x:Key="Brushes.NumPad.Button.Background.Pressed" Color="{StaticResource Color.NumPad.Button.Background.Pressed}"/>
+
+  <SolidColorBrush x:Key="Brushes.Viewer.TextBlock.Background.Default" Color="{StaticResource Color.Viewer.Background.Default}"/>
+  <!--#endregion-->
 </ResourceDictionary>
