@@ -11,36 +11,25 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return GetEnumDescription2((Enum)value);
+            if (value == null)
+                throw new ArgumentNullException(nameof(value), "cannot be null");
+
+            if (value is Enum == false)
+                throw new InvalidOperationException("The value could not be converted to an enum");
+
+            return GetDescriptionFromEnum((Enum)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException(); //<< -- 실무였다면 이런거 다 구현해야해요.
+            throw new NotImplementedException();
         }
 
-        private static string GetEnumDescription(Enum enumObj)
+        private static string GetDescriptionFromEnum(Enum enumObj)
         {
             FieldInfo fi = enumObj.GetType().GetField(enumObj.ToString());
-
             object[] attribArray = fi.GetCustomAttributes(false);
 
-            if (attribArray.Length == 0)
-            {
-                return enumObj.ToString();
-            }
-            else
-            {
-                var attrib = attribArray[0] as DescriptionAttribute;
-                return attrib.Description;
-            }
-        }
-
-        private static string GetEnumDescription2(Enum enumObj)
-        {
-            FieldInfo fi = enumObj.GetType().GetField(enumObj.ToString());
-
-            object[] attribArray = fi.GetCustomAttributes(false);
             return attribArray.OfType<DescriptionAttribute>()
                                    .FirstOrDefault()
                                    ?.Description;

@@ -39,7 +39,7 @@
             double microSeconds = GetMicroSecondsFrom(srcTimeValue, srcTimeUnit);
             double convertedTime = ConvertMicroSeconds(microSeconds, destTimeUnit);
 
-            return convertedTime.ToString();
+            return convertedTime.ToString("0.##############");
         }
 
         private static double GetMicroSecondsFrom(double time, ETimeUnit timeUnit)
