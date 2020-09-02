@@ -6,7 +6,7 @@
     <Style.Triggers>
       <DataTrigger>
         <DataTrigger.Binding>
-          <MultiBinding Converter="{StaticResource mcvt_IsLessThan}">
+          <MultiBinding Converter="{StaticResource mcvt_IsWidthLessThanHeight}">
             <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualWidth"/>
             <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualHeight"/>
           </MultiBinding>
@@ -17,7 +17,7 @@
       </DataTrigger>
       <DataTrigger>
         <DataTrigger.Binding>
-          <MultiBinding Converter="{StaticResource mcvt_IsLessThan}">
+          <MultiBinding Converter="{StaticResource mcvt_IsWidthLessThanHeight}">
             <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualWidth"/>
             <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Path="ActualHeight"/>
           </MultiBinding>
