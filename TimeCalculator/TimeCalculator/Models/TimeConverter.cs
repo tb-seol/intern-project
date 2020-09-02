@@ -13,7 +13,7 @@
         private const ulong HOUR_VALUE = MINUTE_VALUE * 60;
         private const ulong DAY_VALUE = HOUR_VALUE * 24;
         private const ulong WEEK_VALUE = DAY_VALUE * 7;
-        private const ulong YEAR_VALUE = DAY_VALUE * 365;
+        private const ulong YEAR_VALUE = (ulong)(DAY_VALUE * 365.25d);
 
         private static readonly List<ulong> _unitValues = new List<ulong> {
             MICRO_SECOND_VALUE,
