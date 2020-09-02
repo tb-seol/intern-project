@@ -7,8 +7,16 @@
         private const int MAX_NUMBER_COUNT = 15;
 
         private readonly StringBuilder _inputCharacters = new StringBuilder(MAX_NUMBER_COUNT * 2);
-        private uint _numberCount = 1;
         private bool _isUsedDecimalPoint;
+        private int NumberCount
+        {
+            get
+            {
+                return this._isUsedDecimalPoint
+                    ? this._inputCharacters.Length - 1
+                    : this._inputCharacters.Length;
+            }
+        }
 
         public TimeBuilder()
         {
@@ -17,16 +25,14 @@
 
         public void SetTime(string time)
         {
+            if (ValidateStringForTime(time) == false)
+                return;
+
             this._inputCharacters.Clear();
             this._inputCharacters.Append(time);
 
             if (time.Contains('.'))
                 this._isUsedDecimalPoint = true;
-
-            this._numberCount = (uint)time.Length;
-
-            if (this._isUsedDecimalPoint)
-                this._numberCount--;
         }
 
         public string ToBuild()
@@ -38,7 +44,6 @@
         {
             this._inputCharacters.Clear();
             this._inputCharacters.Append('0');
-            this._numberCount = 1;
             this._isUsedDecimalPoint = false;
         }
 
@@ -50,21 +55,20 @@
             {
                 if (this._inputCharacters[^1] == '.')
                     this._isUsedDecimalPoint = false;
-                else
-                    this._numberCount--;
+
                 this._inputCharacters.Length--;
             }
         }
 
         public void AppendCharacter(char character)
         {
-            if (CanAppend(character) == false && ValidateCharToAppend(character) == false)
+            if (CanAppend(character) == false || ValidateCharToAppend(character) == false)
                 return;
 
             if (character == '.')
                 this._isUsedDecimalPoint = true;
-            else if (TryRemoveFirstCharacterIfZero() == false)
-                this._numberCount++;
+            else
+                TryRemoveFirstCharacterIfZero();
 
             this._inputCharacters.Append(character);
         }
@@ -74,15 +78,7 @@
             if (input == '.')
                 return (this._isUsedDecimalPoint == false);
             else
-                return this._numberCount < MAX_NUMBER_COUNT;
-        }
-
-        private static bool ValidateCharToAppend(char input)
-        {
-            if ((input < '0' || input > '9') && input != '.')
-                return true;
-            else
-                return false;
+                return this.NumberCount < MAX_NUMBER_COUNT;
         }
 
         private bool TryRemoveFirstCharacterIfZero()
@@ -95,6 +91,23 @@
                 this._inputCharacters.Remove(0, 1);
                 return true;
             }
+
+            return false;
+        }
+
+        private static bool ValidateCharToAppend(char input)
+        {
+            if ((input < '0' || input > '9') && input != '.')
+                return false;
+            else
+                return true;
+        }
+
+        private static bool ValidateStringForTime(string input)
+        {
+            if (double.TryParse(input, out double output))
+                if (output >= 0)
+                    return true;
 
             return false;
         }
