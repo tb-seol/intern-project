@@ -52,10 +52,11 @@ namespace TimeCalculator.UnitTests.Converter
         }
 
         [Theory]
-        [InlineData(new object[] { 200, 100, 300 }, null, null, null)]
-        [InlineData(new object[] { 200, 100, 300, 400, 500 }, null, null, null)]
-        [InlineData(new object[] { 200 }, null, null, null)]
         [InlineData(new object[] { }, null, null, null)]
+        [InlineData(new object[] { 200 }, null, null, null)]
+        [InlineData(new object[] { 200, 100, 300 }, null, null, null)]
+        [InlineData(new object[] { 200, 100, 300, 400 }, null, null, null)]
+        [InlineData(new object[] { 200, 100, 300, 400, 500 }, null, null, null)]
         public void Convert_does_throw_ArgumentException_if_incorrect_length_of_values(
             object[] values, Type targetType, object parameter, CultureInfo cultureInfo)
         {
@@ -73,14 +74,15 @@ namespace TimeCalculator.UnitTests.Converter
         }
 
         [Theory]
-        [InlineData(5.5d, 5.5f)]
         [InlineData(1234, 123.4f)]
+        [InlineData(123.4d, 1234)]
+        [InlineData(123.4d, 123.4f)]
         public void Convert_does_throw_InvalidOperationException_if_typeof_values_are_not_integer(
-            object a, object b)
+            object width, object height)
         {
             // Arrange
             var sut = new IsWidthLessThanHeightMultiConverter();
-            object[] values = new object[] { a, b };
+            object[] values = new object[] { width, height };
 
             // Act
             var tryConvert = new Action(() =>

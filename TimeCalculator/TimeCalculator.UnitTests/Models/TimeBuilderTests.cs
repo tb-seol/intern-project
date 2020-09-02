@@ -25,6 +25,7 @@ namespace TimeCalculator.UnitTests.Models
 
         #region SetTime
         [Theory]
+        [InlineData(null, "0")]
         [InlineData("", "0")]
         [InlineData("0", "0")]
         [InlineData("1", "1")]
@@ -34,7 +35,6 @@ namespace TimeCalculator.UnitTests.Models
         [InlineData("-5", "0")]
         [InlineData("abcd", "0")]
         [InlineData("1.2.3", "0")]
-        [InlineData(null, "0")]
         public void SetTime_does_set_time_correctly(
             string inputValue, string expectedValue)
         {
@@ -114,6 +114,7 @@ namespace TimeCalculator.UnitTests.Models
 
         #region Clear
         [Theory]
+        [InlineData(null)]
         [InlineData("")]
         [InlineData("0")]
         [InlineData("1")]
@@ -121,7 +122,6 @@ namespace TimeCalculator.UnitTests.Models
         [InlineData("-1")]
         [InlineData("asdf")]
         [InlineData("1.2.3..")]
-        [InlineData(null)]
         public void Clear_does_set_time_to_zero(
             string inputValue)
         {
@@ -140,6 +140,7 @@ namespace TimeCalculator.UnitTests.Models
 
         #region RemoveLastCharacter
         [Theory]
+        [InlineData(null, "0")]
         [InlineData("0", "0")]
         [InlineData("1", "0")]
         [InlineData(".", "0")]

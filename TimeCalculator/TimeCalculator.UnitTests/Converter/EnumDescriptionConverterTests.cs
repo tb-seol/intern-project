@@ -53,10 +53,8 @@ namespace TimeCalculator.UnitTests.Converter
             result.Should().Be(expectedResult);
         }
 
-        [Theory]
-        [InlineData(null)]
-        public void Convert_does_throw_ArgumentNullException_if_value_is_null(
-            Enum enumValue)
+        [Fact]
+        public void Convert_does_throw_ArgumentNullException_if_value_is_null()
         {
             // Arrange
             var sut = new EnumDescriptionConverter();
@@ -64,7 +62,7 @@ namespace TimeCalculator.UnitTests.Converter
             // Act
             var tryConvert = new Action(() =>
             {
-                sut.Convert(enumValue, null, null, null);
+                sut.Convert(null, typeof(string), "asdf", CultureInfo.CurrentUICulture);
             });
 
             // Assert
