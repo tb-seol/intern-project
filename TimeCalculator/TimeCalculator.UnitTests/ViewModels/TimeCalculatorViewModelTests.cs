@@ -123,6 +123,58 @@ namespace TimeCalculator.UnitTests.ViewModels
             // Assert
             result.Should().NotBeNull();
         }
+
+        [Theory]
+        [InlineData('0', "0")]
+        [InlineData('1', "1")]
+        [InlineData('2', "2")]
+        [InlineData('3', "3")]
+        [InlineData('4', "4")]
+        [InlineData('5', "5")]
+        [InlineData('6', "6")]
+        [InlineData('7', "7")]
+        [InlineData('8', "8")]
+        [InlineData('9', "9")]
+        [InlineData('.', "0.")]
+        public void Execute_of_InputCommand_does_return_correctly(
+            char commandParameter,
+            string expectedTime)
+        {
+            // Arrange
+            var sut = new TimeCalculatorViewModel();
+
+            // Act
+            sut.InputCommand.Execute(commandParameter);
+
+            // Assert
+            sut.Time.Should().Be(expectedTime);
+        }
+
+        [Theory]
+        [InlineData(',')]
+        [InlineData('-')]
+        [InlineData('+')]
+        [InlineData('`')]
+        [InlineData('|')]
+        [InlineData('?')]
+        [InlineData('a')]
+        [InlineData('A')]
+        [InlineData('ㅇ')]
+        [InlineData('★')]
+        [InlineData('/')]
+        [InlineData('\\')]
+        public void Excute_of_InputCommand_does_return_zero_as_string(
+            char commandParameter)
+        {
+            // Arrange
+            var sut = new TimeCalculatorViewModel();
+
+            // Act
+            sut.InputCommand.Execute(commandParameter);
+
+            // Assert
+            sut.Time.Should().Be("0");
+        }
         #endregion
 
         #region ClearCommand
@@ -138,6 +190,36 @@ namespace TimeCalculator.UnitTests.ViewModels
             // Assert
             result.Should().NotBeNull();
         }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("0")]
+        [InlineData("5")]
+        [InlineData(".")]
+        [InlineData("123")]
+        [InlineData("123.456")]
+        [InlineData("123456.")]
+        [InlineData("0.")]
+        [InlineData("0.00")]
+        [InlineData("0.00001")]
+        [InlineData("asdf")]
+        [InlineData("-+-+-+-")]
+        [InlineData("ㅁㄴㅇㄹㅋㅌㅊㅍ")]
+        [InlineData("@@@@////????!!!!")]
+        public void Execute_of_ClearCommand_does_clear_correctly(
+            string initTime)
+        {
+            // Arrange
+            var sut = new TimeCalculatorViewModel();
+            foreach (char initChar in initTime)
+                sut.AppendCharacter(initChar);
+
+            // Act
+            sut.ClearCommand.Execute(null);
+
+            // Assert
+            sut.Time.Should().Be("0");
+        }
         #endregion
 
         #region DeleteCommand
@@ -152,6 +234,31 @@ namespace TimeCalculator.UnitTests.ViewModels
 
             // Assert
             result.Should().NotBeNull();
+        }
+
+        [Theory]
+        [InlineData("", "0")]
+        [InlineData("0", "0")]
+        [InlineData("5", "0")]
+        [InlineData("5.", "5")]
+        [InlineData("1.2", "1.")]
+        [InlineData("34.", "34")]
+        [InlineData("0.00", "0.0")]
+        [InlineData("123456.789", "123456.78")]
+        public void Execute_of_DeleteCommand_does_delete_correctly(
+            string initTime,
+            string expectedTime)
+        {
+            // Arrange
+            var sut = new TimeCalculatorViewModel();
+            foreach (char initChar in initTime)
+                sut.AppendCharacter(initChar);
+
+            // Act
+            sut.DeleteCommand.Execute(null);
+
+            // Assert
+            sut.Time.Should().Be(expectedTime);
         }
         #endregion
 
@@ -178,7 +285,29 @@ namespace TimeCalculator.UnitTests.ViewModels
         [InlineData(new char[] { '1', '.', '3' }, "1.3")]
         [InlineData(new char[] { '1', '2', '.' }, "12.")]
         [InlineData(new char[] { '0', '.', '3' }, "0.3")]
-        public void AppendCharacter_does_append_char_correctly(
+        public void AppendCharacter_does_append_char_that_correct(
+            char[] appendingChars,
+            string expectedTime)
+        {
+            // Arrange
+            var sut = new TimeCalculatorViewModel();
+
+            // Act
+            foreach (char appendingChar in appendingChars)
+                sut.AppendCharacter(appendingChar);
+
+            // Assert
+            sut.Time.Should().Be(expectedTime);
+        }
+
+        [Theory]
+        [InlineData(new char[] { 'a', 'b', 'c' }, "0")]
+        [InlineData(new char[] { 'ㄱ', 'ㄴ', 'ㄷ' }, "0")]
+        [InlineData(new char[] { '-' }, "0")]
+        [InlineData(new char[] { '.', '1', ',' }, "0.1")]
+        [InlineData(new char[] { '5', 'q', '+' }, "5")]
+        [InlineData(new char[] { '0', 'o', '1', 'O' }, "1")]
+        public void AppendCharacter_does_not_append_char_that_incorrect(
             char[] appendingChars,
             string expectedTime)
         {
