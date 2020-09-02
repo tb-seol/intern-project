@@ -83,16 +83,13 @@
 
         private bool TryRemoveFirstCharacterIfZero()
         {
-            if (this._inputCharacters.Length > 1)
-                return false;
-
-            if (this._inputCharacters[0] == '0')
+            if (this._inputCharacters.Length == 1 && this._inputCharacters[0] == '0')
             {
                 this._inputCharacters.Remove(0, 1);
                 return true;
             }
-
-            return false;
+            else
+                return false;
         }
 
         private static bool ValidateCharToAppend(char input)
