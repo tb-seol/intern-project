@@ -10,7 +10,7 @@ namespace TimeCalculator.UnitTests.Models
     public class TimeConverterTests
     {
         #region Convert
-        public class Testset_Convert_does_return_correctly : IEnumerable<object[]>
+        public class Testset1_Convert_does_return_correctly : IEnumerable<object[]>
         {
             private readonly List<object[]> _data = new List<object[]>
             {
@@ -80,13 +80,59 @@ namespace TimeCalculator.UnitTests.Models
                 new object[] { "0.001", ETimeUnit.Year, ETimeUnit.Year, "0.001"}
             };
 
-            public IEnumerator<object[]> GetEnumerator() => this._data.GetEnumerator();
+            public IEnumerator<object[]> GetEnumerator()
+            {
+                return this._data.GetEnumerator();
+            }
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
+        public class Testset2_Convert_does_return_correctly : TheoryData<string, ETimeUnit, ETimeUnit, string>
+        {
+            public Testset2_Convert_does_return_correctly()
+            {
+                Add("123456789", ETimeUnit.MicroSecond, ETimeUnit.MicroSecond, "123456789");
+                Add("123456789", ETimeUnit.MicroSecond, ETimeUnit.MilliSecond, "123456.789");
+                Add("123456789", ETimeUnit.MicroSecond, ETimeUnit.Second, "123.456789");
+                Add("123456789", ETimeUnit.MicroSecond, ETimeUnit.Minute, "2.05761315");
+                Add("123456789", ETimeUnit.MicroSecond, ETimeUnit.Hour, "0.03429355");
+                Add("123456789", ETimeUnit.MicroSecond, ETimeUnit.Day, "0.0014289");
+                Add("123456789", ETimeUnit.MicroSecond, ETimeUnit.Week, "0.00020413");
+                Add("123456789", ETimeUnit.MicroSecond, ETimeUnit.Year, "0.00000391");
+            }
+        }
+
+        public static IEnumerable<object[]> Testset3_Convert_does_return_correctly()
+        {
+            yield return new object[] { "123456789", ETimeUnit.MicroSecond, ETimeUnit.MicroSecond, "123456789" };
+            yield return new object[] { "123456789", ETimeUnit.MicroSecond, ETimeUnit.MilliSecond, "123456.789" };
+            yield return new object[] { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Second, "123.456789" };
+            yield return new object[] { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Minute, "2.05761315" };
+            yield return new object[] { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Hour, "0.03429355" };
+            yield return new object[] { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Day, "0.0014289" };
+            yield return new object[] { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Week, "0.00020413" };
+            yield return new object[] { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Year, "0.00000391" };
+        }
+
+        public static TheoryData<string, ETimeUnit, ETimeUnit, string> Testset4_Convert_does_return_correctly =>
+            new TheoryData<string, ETimeUnit, ETimeUnit, string>
+            {
+                { "123456789", ETimeUnit.MicroSecond, ETimeUnit.MicroSecond, "123456789" },
+                { "123456789", ETimeUnit.MicroSecond, ETimeUnit.MilliSecond, "123456.789" },
+                { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Second, "123.456789" },
+                { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Minute, "2.05761315" },
+                { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Hour, "0.03429355" },
+                { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Day, "0.0014289" },
+                { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Week, "0.00020413" },
+                { "123456789", ETimeUnit.MicroSecond, ETimeUnit.Year, "0.00000391" }
+            };
+
         [Theory]
-        [ClassData(typeof(Testset_Convert_does_return_correctly))]
+        [ClassData(typeof(Testset1_Convert_does_return_correctly))]
+        [ClassData(typeof(Testset2_Convert_does_return_correctly))]
+        [MemberData(nameof(Testset3_Convert_does_return_correctly))]
+        [MemberData(nameof(Testset4_Convert_does_return_correctly))]
         public void Convert_does_return_correctly(
             string source, ETimeUnit oldUnit, ETimeUnit newUnit,
             string expectedValue)
