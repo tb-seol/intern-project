@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoFixture.Xunit2;
 using FluentAssertions;
 using Saige.MVVM;
 using TimeCalculator.ViewModels;
@@ -192,22 +193,26 @@ namespace TimeCalculator.UnitTests.ViewModels
         }
 
         [Theory]
-        [InlineData("")]
-        [InlineData("0")]
-        [InlineData("5")]
-        [InlineData(".")]
-        [InlineData("123")]
-        [InlineData("123.456")]
-        [InlineData("123456.")]
-        [InlineData("0.")]
-        [InlineData("0.00")]
-        [InlineData("0.00001")]
-        [InlineData("asdf")]
-        [InlineData("-+-+-+-")]
-        [InlineData("ㅁㄴㅇㄹㅋㅌㅊㅍ")]
-        [InlineData("@@@@////????!!!!")]
+        [InlineAutoData("0")]
+        [InlineAutoData("5")]
+        [InlineAutoData(".")]
+        [InlineAutoData("123")]
+        [InlineAutoData("123.456")]
+        [InlineAutoData("123456.")]
+        [InlineAutoData("0.")]
+        [InlineAutoData("0.00")]
+        [InlineAutoData("0.00001")]
+        [InlineAutoData("asdf")]
+        [InlineAutoData("-+-+-+-")]
+        [InlineAutoData("ㅁㄴㅇㄹㅋㅌㅊㅍ")]
+        [InlineAutoData("@@@@////????!!!!")]
+        [InlineAutoData()]
+        [InlineAutoData()]
+        [InlineAutoData()]
+        [InlineAutoData()]
+        [InlineAutoData()]
         public void Execute_of_ClearCommand_does_clear_correctly(
-            string initTime)
+            string initTime, object param)
         {
             // Arrange
             var sut = new TimeCalculatorViewModel();
@@ -215,7 +220,7 @@ namespace TimeCalculator.UnitTests.ViewModels
                 sut.AppendCharacter(initChar);
 
             // Act
-            sut.ClearCommand.Execute(null);
+            sut.ClearCommand.Execute(param);
 
             // Assert
             sut.Time.Should().Be("0");
@@ -334,6 +339,11 @@ namespace TimeCalculator.UnitTests.ViewModels
         [InlineData("0.123456")]
         [InlineData("0.00005")]
         [InlineData("123456789012345.")]
+        [InlineAutoData()]
+        [InlineAutoData()]
+        [InlineAutoData()]
+        [InlineAutoData()]
+        [InlineAutoData()]
         public void Clear_does_set_Time_to_zero(
             string initTime)
         {
