@@ -3,56 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              Focusable="True"
              mc:Ignorable="d">
-  <UserControl.Resources>
-    <sys:Char x:Key="charValue_Zero">0</sys:Char>
-    <sys:Char x:Key="charValue_One">1</sys:Char>
-    <sys:Char x:Key="charValue_Two">2</sys:Char>
-    <sys:Char x:Key="charValue_Three">3</sys:Char>
-    <sys:Char x:Key="charValue_Four">4</sys:Char>
-    <sys:Char x:Key="charValue_Five">5</sys:Char>
-    <sys:Char x:Key="charValue_Six">6</sys:Char>
-    <sys:Char x:Key="charValue_Seven">7</sys:Char>
-    <sys:Char x:Key="charValue_Eight">8</sys:Char>
-    <sys:Char x:Key="charValue_Nine">9</sys:Char>
-    <sys:Char x:Key="charValue_Decimal">.</sys:Char>
-  </UserControl.Resources>
   <UserControl.InputBindings>
     <KeyBinding Key="NumPad0"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Zero}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad1"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_One}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad2"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Two}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad3"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Three}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad4"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Four}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad5"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Five}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad6"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Six}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad7"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Seven}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad8"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Eight}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="NumPad9"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Nine}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
     <KeyBinding Key="Decimal"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Decimal}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Key, Converter={StaticResource cvt_InputCommandParameter}}"/>
 
     <KeyBinding Key="Esc" Command="{Binding ClearCommand}"/>
     <KeyBinding Key="Delete" Command="{Binding ClearCommand}"/>
@@ -101,50 +87,50 @@
         <Button Grid.Row="1"
                 Content="7"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Seven}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
         <Button Grid.Row="1" Grid.Column="1"
                 Content="8"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Eight}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
         <Button Grid.Row="1" Grid.Column="2"
                 Content="9"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Nine}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
 
         <Button Grid.Row="2"
                 Content="4"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Four}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
         <Button Grid.Row="2" Grid.Column="1"
                 Content="5"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Five}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
         <Button Grid.Row="2" Grid.Column="2"
                 Content="6"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Six}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
 
         <Button Grid.Row="3"
                 Content="1"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_One}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
         <Button Grid.Row="3" Grid.Column="1"
                 Content="2"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Two}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
         <Button Grid.Row="3" Grid.Column="2"
                 Content="3"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Three}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
 
         <Button Grid.Row="4" Grid.Column="1"
                 Content="0"
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Zero}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
         <Button Grid.Row="4" Grid.Column="2"
                 Content="."
                 Command="{Binding InputCommand}"
-                CommandParameter="{StaticResource charValue_Decimal}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content, Converter={StaticResource cvt_InputCommandParameter}}"/>
       </Grid>
     </UniformGrid>
   </DockPanel>
