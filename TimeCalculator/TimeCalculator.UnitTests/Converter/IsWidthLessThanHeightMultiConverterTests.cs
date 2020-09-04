@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using FluentAssertions;
+using TimeCalculator.Converter;
 using Xunit;
 
 namespace TimeCalculator.UnitTests.Converter

@@ -1,4 +1,4 @@
-﻿namespace TimeCalculator
+﻿namespace TimeCalculator.Converter
 {
     using System;
     using System.ComponentModel;

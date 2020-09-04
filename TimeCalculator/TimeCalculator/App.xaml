@@ -2,14 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TimeCalculator"
+             xmlns:cvt="clr-namespace:TimeCalculator.Converter"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
-          <local:IsWidthLessThanHeightMultiConverter x:Key="mcvt_IsWidthLessThanHeight"/>
-          <local:EnumDescriptionConverter x:Key="cvt_EnumDescription"/>
+          <cvt:IsWidthLessThanHeightMultiConverter x:Key="mcvt_IsWidthLessThanHeight"/>
+          <cvt:EnumDescriptionConverter x:Key="cvt_EnumDescription"/>
+          <cvt:InputCommandParameterConverter x:Key="cvt_InputCommandParameter"/>
         </ResourceDictionary>
 
         <ResourceDictionary>

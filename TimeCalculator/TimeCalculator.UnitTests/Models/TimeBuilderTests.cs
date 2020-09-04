@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using TimeCalculator.Models;
 using Xunit;
 
 namespace TimeCalculator.UnitTests.Models

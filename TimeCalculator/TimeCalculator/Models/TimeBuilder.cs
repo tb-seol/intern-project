@@ -1,4 +1,4 @@
-﻿namespace TimeCalculator
+﻿namespace TimeCalculator.Models
 {
     using System.Text;
 

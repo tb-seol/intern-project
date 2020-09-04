@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using FluentAssertions;
+using TimeCalculator.Converter;
 using Xunit;
 
 namespace TimeCalculator.UnitTests.Converter
